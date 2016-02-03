@@ -1,0 +1,279 @@
+.nav{
+height: 60px;
+margin-bottom: 5px;
+margin-top: -15px;
+position: fixed;
+width:100%;
+background-color: #FFFFFF;
+z-index: 999;
+
+}
+
+.nav #logo{
+	font-family: chelsea-market;
+	font-weight: 450;
+	font-size: 40px;
+	font-style: normal;
+	position: static;
+}
+
+.nav a {
+	color: #000000;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 14px 10px;
+	
+margin-top: 15px;
+}
+
+.nav h2 .pull-left{
+	margin-bottom: 10px;
+}
+
+.jumbotron {
+	height: 490px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url(Eiffel%20Sunset%203.JPG);
+	background-attachment: fixed;
+	
+}
+
+.jumbotron .container {
+	position: relative;
+	top: 100px;
+	z-index: 99;
+	
+}
+
+.jumbotron h1 {
+	font-size: 40px;
+	font-family: source-serif-pro;
+	font-weight: 400;
+	font-style: normal;
+	color: #FFFFFF;
+}
+
+.jumbotron p {
+	font-size: 20px;
+	color: #FFFFFF;
+	font-family: source-serif-pro;
+	font-style: normal;
+	font-weight: 400;
+	-webkit-box-shadow: 10px 5% 15px #833C3D;
+	box-shadow: 10px 5% 15px #833C3D;
+}
+
+.learn-more {
+  background-color: #f7f7f7;
+}
+
+.learn-more h3 {
+  font-family: 'Shift', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.learn-more a {
+  color: #FCFCFC;
+}
+
+.neighborhood-guides{
+ background-color: #efefef;
+ border-bottom: 1px solid #dbdbdb;
+}
+
+.neighborhood-guides h2{
+ color: #393c3d;
+font-size: 24px;
+}
+
+.neighborhood-guides p{
+font-size: 15px;
+margin-bottom: 13px;
+}
+    h1 {
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	font-style: normal;
+	font-weight: 400;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+}
+p {
+	font-family: source-serif-pro;
+	font-style: normal;
+	font-weight: 400;
+	margin-left: 8px;
+	
+}
+
+footer{
+	
+	margin-top: 0px;
+	margin-bottom: 0px;
+	background-color: #efefef;
+	color: #393c3d;
+	text-align: center;
+	font-family: source-serif-pro;
+	font-style: normal;
+	font-weight: 400;
+	bottom: 0;
+	position: fixed; 
+	width: 100%;
+}
+
+}
+
+.next-step a{
+	color: #000000;
+	font-family: 'Shift', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.next-step .container {
+margin-top: 20px;	
+margin-bottom: 5px;
+}
+
+section {
+	background-color: #000000;
+	margin-left: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+
+}
+
+.nav section a
+
+{
+	color: #FFFFFF;
+}
+
+.learn-more .container .row {
+
+margin-top: -25px;
+
+
+
+	
+}
+
+.learn-more .container .row .col-md-4 a{
+	color: #333232;
+}
+
+.jumbotron .container section
+
+{
+	clear: left;
+	float: left;
+	width: 450px;
+}
+
+.jumbotron .container .header
+
+{
+	clear: left;
+	float: left;
+	width: 650px;
+	margin-left: -20px;
+}
+
+.superstars{
+	height: 500px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    background-color:white;
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+
+#login{
+
+	background-color: #efefef;
+	margin-top: 3%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

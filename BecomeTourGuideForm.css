@@ -1,0 +1,108 @@
+.nav{
+height: 60px;
+margin-bottom: 10px;
+margin-top: -20px;
+position: fixed;
+width:100%;
+background-color: #FFFFFF;
+margin-left:25em;
+margin-right:25em;
+
+
+}
+
+.nav .container a#logo{
+	font-family: chelsea-market;
+	font-size: 40px;
+	font-style: normal;
+	color:rgba(0,0,0,1.00);
+	font-weight: 450;
+	position: static;
+	margin-left:-118px;
+	
+
+}
+.nav .container a#contactus {
+	color: #000000;
+	font-size: 11px;
+	font-weight: bold;
+	margin-right:51em;
+	margin-top:2em;
+	
+}
+
+.nav .container
+
+{
+	padding-top:2px;
+	padding-top:1em;	
+}
+
+.BecomeTourGuide
+{
+	margin-right: 25em;	
+	margin-left: 24em;	
+	background-color: #9DCFFF;
+	width:50em;
+	background-image: url( C:\Users\bnbih\Pictures\one.jpg);
+	
+	
+}
+
+.BecomeTourGuide .formhead
+{
+	width:50em;	
+	
+	height: 5em;
+	padding-top:.1px;
+	margin-top:10px;
+	
+	background-color:rgba(188,222,255,1.00);
+	
+}
+
+.BecomeTourGuide #frimg{
+margin-left: 1em;	
+}
+
+
+footer{
+	
+	margin-top: -1px;
+	margin-bottom: 0px;
+	background-color: #000000;
+	color: #FFFFFF;
+	text-align: center;
+	font-family: source-serif-pro;
+	font-style: normal;
+	font-weight: 400;
+	bottom: 0;
+	position: fixed; 
+	width: 100%;
+}
+
+
+
+
+.BecomeTourGuide form .tex {
+	margin-right: 0px;
+	margin-bottom: 5px;
+	margin-top: 15px;
+	margin-left: 50px;
+}
+.BecomeTourGuide h2 {
+	text-align: center;
+}
+
+.BecomeTourGuide form .tex p {
+	font-family: chelsea-market;
+	font-style: normal;
+	font-weight: 500;
+	background-color: #FFFFFF;
+}
+
+#costy
+{
+	margin-right: 7em;
+}
+
