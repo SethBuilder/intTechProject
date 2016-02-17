@@ -1,35 +1,3 @@
-.nav{
-height: 60px;
-margin-bottom: 5px;
-margin-top: -15px;
-position: fixed;
-width:100%;
-background-color: #FFFFFF;
-z-index: 999;
-
-}
-
-.nav #logo{
-	font-family: chelsea-market;
-	font-weight: 450;
-	font-size: 40px;
-	font-style: normal;
-	position: static;
-}
-
-.nav a {
-	color: #000000;
-	font-size: 11px;
-	font-weight: bold;
-	padding: 14px 10px;
-	
-margin-top: 15px;
-}
-
-.nav h2 .pull-left{
-	margin-bottom: 10px;
-}
-
 .jumbotron {
 	height: 490px;
 	margin-left: 0px;
@@ -149,18 +117,9 @@ section {
 
 }
 
-.nav section a
-
-{
-	color: #FFFFFF;
-}
-
 .learn-more .container .row {
 
 margin-top: -25px;
-
-
-
 	
 }
 
@@ -260,20 +219,6 @@ margin-top: -25px;
 	background-color: #efefef;
 	margin-top: 3%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
