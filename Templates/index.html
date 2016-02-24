@@ -1,0 +1,21 @@
+{% extends "homeBase.html" %}
+
+
+    {% block content %}
+
+        {% if users %}}
+
+            <p> Super Stars </p>
+
+            <ul>
+
+                {% for user in users %}
+
+                <li> {{ user.username }} </li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            <p>no users to show</p>
+        {% endif %}
+    {%endblock content %}
