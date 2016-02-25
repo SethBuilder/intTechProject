@@ -3,7 +3,7 @@ from mainapp.models import User
 
 
 def base_profile(request):
-    return render(request, 'base.html')
+    return render(request, 'profilePageBase.html')
 
 
 def index(request):
