@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^admin/', admin.site.urls),
     url(r'^baseProfile/', views.base_profile, name="baseProfile"),
     url(r'^$', views.index, name="index"),
-                      )
+    url(r'^city/', views.city, name="city"),
+    )
