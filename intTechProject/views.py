@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from mainapp.models import User
+from mainapp.models import UserRating
+from mainapp.models import City
+from django.db.models import Sum
+from django.db.models import Avg
+
 
 def base_profile(request):
     return render(request, 'base.html')
