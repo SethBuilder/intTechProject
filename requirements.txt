@@ -1,3 +1,4 @@
-Django==1.7
-Pillow==3.1.1
-wheel==0.29.0
+Django==1.7.11
+django-crispy-forms==1.6.0
+Pillow==3.1.0
+wheel==0.24.0
