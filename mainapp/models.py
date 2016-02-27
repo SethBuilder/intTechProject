@@ -1,14 +1,23 @@
 from django.db import models
 from django.db.models import Avg
+from django.template.defaultfilters import slugify
 
 
 #this is the model for city
 class City(models.Model):
-	name = models.CharField(max_length=128, default="")
-	country = models.CharField(max_length=128, default="Scotland")
+        name = models.CharField(max_length=128, default="")
+        country = models.CharField(max_length=128, default="Scotland")
+        slug = models.SlugField()
 
-	def __unicode__(self):
-		return self.name
+        def save(self, *args, **kwargs):
+            # Uncomment if you don't want the slug to change every time the name changes
+            #if self.id is None:
+                    #self.slug = slugify(self.name)
+            self.slug = slugify(self.name)
+            super(City, self).save(*args, **kwargs)
+
+        def __unicode__(self):
+            return self.name
 
 
 #this is model for user

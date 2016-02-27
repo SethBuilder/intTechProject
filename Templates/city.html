@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Excurj - City Template</title>
-</head>
-<body>
+<html>
+    <head>
+        {% if city %}
+        <title>Excurj - {{ city_name }}</title>
+        {% else %}
+        <title>Excurj - City does not exist!</title>
+        {% endif %}
+    </head>
 
-<p>This template will be used for a city page</p>
-
-</body>
+    <body>
+        {% if city %}
+        <h1>{{ city_name }}</h1>
+        {% else %}
+            The specified city {{ city_name }} does not exist!
+        {% endif %}
+    </body>
 </html>
