@@ -21,18 +21,13 @@
                 {% if users %}
 
                  <ul>
-
                 {% for user in users %}
                 
-                
-
-                <li><p> {{user}}{{ user.firstname }} {{ user.secondname }} from {{user.city.name}}, {{user.city.country}}, {{user.avg_rating}} </p></li>
+                <li><p> {{ user }} {{ user.firstname }} {{ user.secondname }} 
+                    from <a href="{{ user.city.slug }}" style="color:rgba(0,0,200,1.00)">{{ user.city.name }}</a>, {{ user.city.country }}, {{ user.avg_rating }} </p></li>
                 {% endfor %}
                 
-
-
                 </ul>
-
 
         {% else %}
 
