@@ -22,19 +22,28 @@ class City(models.Model):
 
 #this is model for user
 class User(models.Model):
-	username = models.CharField(max_length=128, unique=True)
-	email = models.EmailField(max_length=128, unique=True)
-	#password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-	profilepic = models.ImageField(null=True)
-	firstname = models.CharField(max_length=128, null=True)
-	secondname = models.CharField(max_length=128, null=True)
-	city = models.ForeignKey(City)
+        username = models.CharField(max_length=128, unique=True)
+        email = models.EmailField(max_length=128, unique=True)
+        #password = forms.CharField(max_length=32, widget=forms.PasswordInput)
+        profilepic = models.ImageField(null=True)
+        firstname = models.CharField(max_length=128, null=True)
+        secondname = models.CharField(max_length=128, null=True)
+        city = models.ForeignKey(City)
+        slug = models.SlugField()
+        
+        def save(self, *args, **kwargs):
+                # Uncomment if you don't want the slug to change every time the name changes
+                #if self.id is None:
+                        #self.slug = slugify(self.name)
+                self.slug = slugify(self.username)
+                super(User, self).save(*args, **kwargs)
 
-	def __unicode__(self):
-		return self.username
-	@property
-	def avg_rating(self):
-			return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
+        def __unicode__(self):
+            return self.username
+            
+        @property
+        def avg_rating(self):
+                return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
 
 #this is the model for hobbies - one to many relationship with User
 class Hobby(models.Model):

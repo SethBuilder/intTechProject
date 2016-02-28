@@ -38,3 +38,28 @@ def city(request, city_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'city.html', context_dict)
+    
+    
+def user(request, user_name_slug):
+    # Create a context dictionary which we can pass to the template rendering engine.
+    context_dict = {}
+
+    try:
+        # Can we find a city name slug with the given name?
+        # If we can't, the .get() method raises a DoesNotExist exception.
+        # So the .get() method returns one model instance or raises an exception.
+        user = User.objects.get(slug=user_name_slug)
+        context_dict['user_username'] = user.username
+        context_dict['user_firstname'] = user.firstname
+        context_dict['user_secondname'] = user.secondname
+
+        # We also add the city object from the database to the context dictionary.
+        # We'll use this in the template to verify that the city exists.
+        context_dict['user'] = user
+    except user.DoesNotExist:
+        # We get here if we didn't find the specified city.
+        # Don't do anything - the template displays the "no city" message for us.
+        pass
+
+    # Go render the response and return it to the client.
+    return render(request, 'user.html', context_dict)

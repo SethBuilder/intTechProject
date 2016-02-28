@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% if user %}
+        <title>Excurj - {{ user_username }}</title>
+        {% else %}
+        <title>Excurj - User does not exist!</title>
+        {% endif %}
+    </head>
+
+    <body>
+        {% if user %}
+        <h1>{{ user_username }} - {{ user_firstname }} {{ user_secondname }}</h1>
+        {% else %}
+            The specified user {{ user_username }} does not exist!
+        {% endif %}
+    </body>
+</html>
