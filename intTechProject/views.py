@@ -63,3 +63,11 @@ def user(request, user_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'user.html', context_dict)
+    
+    
+def signup(request):
+    return render(request, 'signup.html')
+
+
+def login(request):
+    return render(request, 'login.html')
