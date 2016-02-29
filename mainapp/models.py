@@ -5,9 +5,10 @@ from django.template.defaultfilters import slugify
 
 #this is the model for city
 class City(models.Model):
-        name = models.CharField(max_length=128, default="")
+        # May have to change unique=true here
+        name = models.CharField(max_length=128, default="", unique=True)
         country = models.CharField(max_length=128, default="Scotland")
-        slug = models.SlugField()
+        slug = models.SlugField(unique=True)
 
         def save(self, *args, **kwargs):
             # Uncomment if you don't want the slug to change every time the name changes
@@ -29,7 +30,7 @@ class User(models.Model):
         firstname = models.CharField(max_length=128, null=True)
         secondname = models.CharField(max_length=128, null=True)
         city = models.ForeignKey(City)
-        slug = models.SlugField()
+        slug = models.SlugField(unique=True)
         
         def save(self, *args, **kwargs):
                 # Uncomment if you don't want the slug to change every time the name changes
