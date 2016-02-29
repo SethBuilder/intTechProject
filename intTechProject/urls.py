@@ -24,4 +24,5 @@ urlpatterns = patterns('',
     url(r'^city/(?P<city_name_slug>\w+)$', views.city, name='city'),
     url(r'^user/(?P<user_name_slug>\w+)$', views.user, name='user'),
     url(r'^signup/', views.signup, name="signup"),
+    url(r'^login/', views.login, name="login"),
     )
