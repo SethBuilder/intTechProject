@@ -1,8 +1,8 @@
-{% extends "homeBase.html" %}
+{% extends "baseTemplate.html" %}
 {% block content %}
 
 
-    <div class="jumbotron">
+    <div class="jumbotron" id="index">
         <div class="container">
             <section class="header">
                 <h1>Find someone to show you around.</h1>
@@ -49,11 +49,26 @@
                 </div>
 
                 <div class="col-md-6">
-                    <h3>Become a guide</h3>
-                    <p>No one knows your city better than you, so why not show visitors what's fun and interesting in
-                        your town.</p>
-                    <p><a href="BecomeTourGuide.html" style="color:rgba(0,0,0,1.00)">Start making friends from all over
-                        the world!</a></p>
+                    <h3>Popular Cities</h3>
+                    {% if cities %}
+
+                    <ul>
+
+                        {% for city in cities %}
+
+                             <li><p><a href="city/{{ city.slug }}"
+                                          style="color:rgba(0,0,200,1.00)">{{ city }}</a>
+                                </p></li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                     {% else %}
+
+                        <p>no cities to show</p>
+
+                    {% endif %}
                 </div>
                 <!--
                 <div class="col-md-4">

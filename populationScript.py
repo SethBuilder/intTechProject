@@ -21,13 +21,13 @@ def populate():
     email_suffixes = ['live.com', 'live.co.uk', 'hotmail.com', 'gmail.com', 'yahoo.com', 'apple.com', 'aol.com']
 
     # Read in names from file
-    names_file = open("populationScriptFiles/newNamesMale.txt", 'r')
+    names_file = open("static/populationScriptFiles/newNamesMale.txt", 'r')
     male_names = names_file.readlines()
 
-    names_file = open("populationScriptFiles/namesFemale.txt", 'r')
+    names_file = open("static/populationScriptFiles/namesFemale.txt", 'r')
     female_names = names_file.readlines()
 
-    names_file = open("populationScriptFiles/namesLast.txt", 'r')
+    names_file = open("static/populationScriptFiles/namesLast.txt", 'r')
     last_names = names_file.readlines()
 
     # new_names_file = open("populationScriptFiles/namesFemale.txt", 'w')
@@ -82,7 +82,7 @@ def populate():
             if hob not in user_hobbies:
                 user_hobbies.append(hob)
 
-        profile_picture = open("populationScriptFiles/Images/maleProfile1.jpg", 'r')
+        profile_picture = open("static/populationScriptFiles/Images/maleProfile1.jpg", 'r')
 
         created_city = City.objects.get_or_create(name=city, country=country)[0]
         created_city.country = country
