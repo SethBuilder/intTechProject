@@ -1,12 +1,29 @@
 .jumbotron {
-    height: 490px;
-    margin-left: 0px;
-    margin-right: 0px;
+
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../images/Eiffel%20Sunset%203.JPG");
     background-attachment: fixed;
 
+}
+
+#index-jumbotron {
+    height: 490px;
+    margin-left: 0;
+    margin-right: 0;
+    background-image: url("../images/Eiffel%20Sunset%203.JPG");
+}
+
+#profile-jumbotron {
+    height: 60vh;
+    background-image: url("/static/images/cityBackgrounds/glasgow.jpg");
+}
+
+#city-title {
+    top: 5%;
+    left: 0;
+    color: white;
+    font-size: x-large;
+    font-family: "Raleway", sans-serif;
 }
 
 .jumbotron .container {
@@ -152,7 +169,8 @@ section {
 }
 
 #navbar-brand {
-    color: #333232;!important;
+    color: #333232;
+!important;
     font-size: x-large;
 }
 
@@ -172,7 +190,7 @@ section {
 
 }
 
-#navbar > ul{
+#navbar > ul {
     padding-bottom: 0;
     padding-top: 0;
 }

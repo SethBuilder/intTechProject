@@ -6,9 +6,8 @@ from django.db.models import Sum
 from django.db.models import Avg
 
 
-
 def base_profile(request):
-    return render(request, 'profilePageBase.html')
+    return render(request, 'profilePage.html')
 
 
 def index(request):
@@ -16,6 +15,7 @@ def index(request):
     context_dict = {"users": user_list}
 
     return render(request, "index.html", context_dict)
+
 
 def city(request, city_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
