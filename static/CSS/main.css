@@ -6,19 +6,19 @@
 
 }
 
-#index.jumbotron {
+#index-jumbotron {
     height: 490px;
     margin-left: 0;
     margin-right: 0;
     background-image: url("../images/Eiffel%20Sunset%203.JPG");
 }
 
-#profile.jumbotron {
+#profile-jumbotron {
     height: 60vh;
     background-image: url("/static/images/cityBackgrounds/glasgow.jpg");
 }
 
-#city.title {
+#city-title {
     top: 5%;
     left: 2%;
     padding-left: 0;
