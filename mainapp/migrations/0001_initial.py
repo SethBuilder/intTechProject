@@ -14,8 +14,9 @@ class Migration(migrations.Migration):
             name='City',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(default=b'', max_length=128)),
+                ('name', models.CharField(default=b'', unique=True, max_length=128)),
                 ('country', models.CharField(default=b'Scotland', max_length=128)),
+                ('slug', models.SlugField(unique=True)),
             ],
             options={
             },
@@ -25,7 +26,7 @@ class Migration(migrations.Migration):
             name='Hobby',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('hobby', models.TextField(max_length=128)),
+                ('hobby', models.CharField(max_length=128)),
             ],
             options={
             },
@@ -35,7 +36,7 @@ class Migration(migrations.Migration):
             name='Language',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('language', models.TextField(max_length=128)),
+                ('language', models.CharField(max_length=128)),
             ],
             options={
             },
@@ -50,6 +51,7 @@ class Migration(migrations.Migration):
                 ('profilepic', models.ImageField(null=True, upload_to=b'')),
                 ('firstname', models.CharField(max_length=128, null=True)),
                 ('secondname', models.CharField(max_length=128, null=True)),
+                ('slug', models.SlugField(unique=True)),
                 ('city', models.ForeignKey(to='mainapp.City')),
             ],
             options={
@@ -60,8 +62,9 @@ class Migration(migrations.Migration):
             name='UserRating',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('comment', models.TextField(max_length=500)),
-                ('rating', models.IntegerField(default=0)),
+                ('comment', models.CharField(max_length=500)),
+                ('for_username', models.CharField(max_length=128)),
+                ('rating', models.IntegerField(default=5)),
                 ('user', models.ForeignKey(to='mainapp.User')),
             ],
             options={
@@ -70,14 +73,14 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='language',
-            name='user',
-            field=models.ForeignKey(to='mainapp.User'),
+            name='users',
+            field=models.ManyToManyField(to='mainapp.User'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='hobby',
-            name='user',
-            field=models.ForeignKey(to='mainapp.User'),
+            name='users',
+            field=models.ManyToManyField(to='mainapp.User'),
             preserve_default=True,
         ),
     ]
