@@ -48,7 +48,7 @@ class User(models.Model):
 
 #this is the model for hobbies - one to many relationship with User
 class Hobby(models.Model):
-	users = models.ManyToMany(User)
+	users = models.ManyToManyField(User)
 	hobby = models.CharField(max_length=128)
 
 	def __unicode__(self):
@@ -57,7 +57,7 @@ class Hobby(models.Model):
 
 #this is the model for languages - one to many relationship with User
 class Language(models.Model):
-	users = models.ManyToMany(User)
+	users = models.ManyToManyField(User)
 	language = models.CharField(max_length=128)
 
 	def __unicode__(self):
