@@ -20,7 +20,9 @@
 
 #city.title {
     top: 5%;
-    left: 0;
+    left: 2%;
+    padding-left: 0;
+    margin-left: 0;
     color: white;
     font-size: x-large;
     font-family: "Raleway", sans-serif;
@@ -49,6 +51,19 @@
     font-weight: 400;
     -webkit-box-shadow: 10px 5% 15px #833C3D;
     box-shadow: 10px 5% 15px #833C3D;
+}
+
+#profileNav {
+
+    position: absolute;
+    top: 55vh;
+    width: 100%;
+
+}
+
+#profileNavbar > ul {
+    padding-bottom: 0;
+    padding-top: 0;
 }
 
 .learn-more {
@@ -113,8 +128,6 @@ footer {
     width: 100%;
 }
 
-}
-
 .next-step a {
     color: #000000;
     font-family: 'Shift', sans-serif;
@@ -162,10 +175,11 @@ section {
     height: 500px;
 }
 
-.navbar {
+#navbar {
     font-family: "Chelsea Market", sans-serif;
     background-color: aliceblue;
     color: #333232;
+    padding-right: 2%;
 }
 
 #navbar-brand {
