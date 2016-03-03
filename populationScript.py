@@ -11,11 +11,11 @@ django.setup()
 from mainapp.models import User, City, Hobby
 
 def populate():
-    cities = ['Glasgow', 'Madrid', 'Stolkholm', 'Sao Paulo']
-    countries = ['Scotland', 'Spain', 'Sweden', 'Brazil']
+    cities = ['Glasgow', 'Madrid', 'Stolkholm', 'Sao Paulo', 'Shanghai', 'Paris', 'Munich', 'Budapest']
+    countries = ['Scotland', 'Spain', 'Sweden', 'Brazil', 'China', 'France', 'Germany', 'Hungary']
 
-    languages = ['English', 'Spanish', 'Swedish', 'Portuguese', 'French', 'German', 'Latin', 'Hungarian', 'Japanese',
-                 'Mandarin', 'Thai']
+    languages = ['English', 'Spanish', 'Swedish', 'Portuguese', 'Chinese', 'French', 'German', 'Hungarian', 'Latin',
+                 'Japanese', 'Thai']
     hobbies = ['Visiting museums', 'Sports', 'Skiing', 'Snowboarding', 'Jet Skiing', 'Bungee Jumping', 'Reading',
                'Music', 'Live Music', 'Films', 'Board Games', 'Food']
     email_suffixes = ['live.com', 'live.co.uk', 'hotmail.com', 'gmail.com', 'yahoo.com', 'apple.com', 'aol.com']
