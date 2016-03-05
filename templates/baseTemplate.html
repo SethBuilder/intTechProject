@@ -35,8 +35,9 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login" class="pull-right">Log in</a></li>
-                        <li><a href="/signup" class="pull-right">Sign up</a></li>
+                        <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
+                        <li><a href="{% url 'registration_register' %}" class="pull-right">Sign up</a></li>
+                        <li></li><a href="{% url 'auth_logout' %}?next=/accounts/logout/">Log Out</a></li>
                     </ul>
 
                 </div>
