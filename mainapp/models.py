@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Avg
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 
 # this is the model for city
@@ -34,17 +35,10 @@ class User(models.Model):
 
     def save(self, *args, **kwargs):
         # Uncomment if you don't want the slug to change every time the name changes
-        # if self.id is None:
-        # self.slug = slugify(self.name)
-        self.slug = slugify(self.username)
-        super(User, self).save(*args, **kwargs)
 
-    def __unicode__(self):
-        return self.username
-
-    @property
-    def avg_rating(self):
-        return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
+        @property
+        def avg_rating(self):
+            return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
 
 
 # this is the model for hobbies - one to many relationship with User
@@ -53,6 +47,14 @@ class Hobby(models.Model):
     hobby = models.CharField(max_length=128)
 
     def __unicode__(self):
+        # if self.id is None:
+        # self.slug = slugify(self.name)
+        self.slug = slugify(self.username)
+        super(User, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.username
+
         return self.hobby
 
 
@@ -74,3 +76,17 @@ class UserRating(models.Model):
 
     def __unicode__(self):
         return unicode(self.rating)
+
+#this is the model for user profile-
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+
+    website = models.URLField(blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __unicode__(self):
+        return self.user.username
+
+
+
