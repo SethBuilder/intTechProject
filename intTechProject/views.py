@@ -14,8 +14,9 @@ def base_profile(request):
 
 
 def index(request):
-    user_list = User.objects.all()
-    city_list = City.objects.all()
+    user_list = User.objects.order_by('-userrating')[:5]
+    city_list = City.objects.order_by('-name')[:5]
+
     context_dict = {"users": user_list, "cities" : city_list}
 
     return render(request, "index.html", context_dict)
