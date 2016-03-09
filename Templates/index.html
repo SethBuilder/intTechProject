@@ -7,7 +7,14 @@
 
         <div class="container">
             <section class="header">
+                {% if user.is_authenticated %}
+                <h1> Hello {{ user.username }}! Let's find someone to show you around</h1>
+{% else %}
+
                 <h1>Find someone to show you around.</h1>
+
+                {% endif %}
+
             </section>
             <section>
                 <p>excurj is an online community where people can show visitors around their cities and towns.</p>
