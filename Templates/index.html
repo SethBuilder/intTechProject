@@ -57,7 +57,7 @@
                         <ul>
                             {% for user in users %}
                                 <li><p><a href="user/{{ user.slug }}"
-                                          style="color:rgba(0,0,200,1.00)">{{ user }} {{ user.firstname }} {{ user.secondname }}</a>
+                                          style="color:rgba(0,0,200,1.00)">{{ user.username }} {{ user.firstname }} {{ user.secondname }}</a>
                                     from <a href="city/{{ user.city.slug }}"
                                             style="color:rgba(0,0,200,1.00)">{{ user.city.name }}</a>, {{ user.city.country }}, {{ user.avg_rating }}
                                 </p></li>

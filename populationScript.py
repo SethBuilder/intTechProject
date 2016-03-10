@@ -8,7 +8,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'intTechProject.settings')
 
 django.setup()
 
-from mainapp.models import User, City, Hobby
+from django.contrib.auth.models import User
+from mainapp.models import City, Hobby, UserProfile
+
 
 def populate():
     cities = ['Glasgow', 'Madrid', 'Stolkholm', 'Sao Paulo', 'Shanghai', 'Paris', 'Munich', 'Budapest']
@@ -88,14 +90,17 @@ def populate():
         created_city.country = country
         created_city.save()
 
-        new_user = User.objects.get_or_create(username=username, email=email, city=created_city)[0]
+        new_user = User.objects.get_or_create(username=username, email=email)[0]
         #new_user.profilepic = profile_picture
         new_user.firstname = first_name
         new_user.secondname = last_name
-        new_user.slug = username
+        
 
         new_user.save()
 
+        new_user_profile = UserProfile.objects.get_or_create(user=new_user, city=created_city, )[0]
+        new_user_profile.slug = username
+        new_user_profile.save()
 
 
 if __name__ == '__main__':

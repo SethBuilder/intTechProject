@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from mainapp.models import User
+#from django.contrib.auth.models import User
+from mainapp.models import UserProfile
 from mainapp.models import UserRating
 from mainapp.models import City
 from django.db.models import Sum
@@ -14,7 +15,7 @@ def base_profile(request):
 
 
 def index(request):
-    user_list = User.objects.order_by('-userrating')[:5]
+    user_list = UserProfile.objects.order_by('-avg_rating')[:5]
     city_list = City.objects.order_by('-name')[:5]
 
     context_dict = {"users": user_list, "cities" : city_list}

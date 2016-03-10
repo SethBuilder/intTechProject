@@ -23,22 +23,27 @@ class City(models.Model):
 
 
 # this is model for user
-class User(models.Model):
-    username = models.CharField(max_length=128, unique=True)
-    email = models.EmailField(max_length=128, unique=True)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+#username = models.CharField(max_length=128, unique=True)
+    
+#email = models.EmailField(max_length=128, unique=True)
     # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    profilepic = models.ImageField(null=True)
-    firstname = models.CharField(max_length=128, null=True)
-    secondname = models.CharField(max_length=128, null=True)
+    profilepic = models.ImageField(blank=True)
+    
+#firstname = models.CharField(max_length=128, null=True)
+    
+#secondname = models.CharField(max_length=128, null=True)
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
+
 
     def save(self, *args, **kwargs):
         # Uncomment if you don't want the slug to change every time the name changes
 
         @property
-        def avg_rating(self):
-            return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
+        def avg_rating(User):
+            return userrating = User.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
 
 
 # this is the model for hobbies - one to many relationship with User
@@ -76,17 +81,6 @@ class UserRating(models.Model):
 
     def __unicode__(self):
         return unicode(self.rating)
-
-#this is the model for user profile-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-
-    website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __unicode__(self):
-        return self.user.username
 
 
 
