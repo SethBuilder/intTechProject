@@ -15,7 +15,7 @@ def base_profile(request):
 
 
 def index(request):
-    user_list = UserProfile.objects.order_by('-avg_rating')[:5]
+    user_list = UserProfile.objects.order_by('-User.avg_rating')[:5]
     city_list = City.objects.order_by('-name')[:5]
 
     context_dict = {"users": user_list, "cities" : city_list}

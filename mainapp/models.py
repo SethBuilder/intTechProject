@@ -43,7 +43,7 @@ class UserProfile(models.Model):
 
         @property
         def avg_rating(User):
-            return userrating = User.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
+            return User.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
 
 
 # this is the model for hobbies - one to many relationship with User
