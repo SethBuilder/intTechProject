@@ -92,8 +92,8 @@ def populate():
 
         new_user = User.objects.get_or_create(username=username, email=email)[0]
         #new_user.profilepic = profile_picture
-        new_user.firstname = first_name
-        new_user.secondname = last_name
+        new_user.first_name = first_name
+        new_user.last_name = last_name
         
 
         new_user.save()

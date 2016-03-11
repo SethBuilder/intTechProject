@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('profilepic', models.ImageField(upload_to=b'', blank=True)),
                 ('slug', models.SlugField(unique=True)),
                 ('city', models.ForeignKey(to='mainapp.City')),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(related_name=b'profile', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -64,7 +64,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('comment', models.CharField(max_length=500)),
-                ('for_username', models.CharField(max_length=128)),
                 ('rating', models.IntegerField(default=5)),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
