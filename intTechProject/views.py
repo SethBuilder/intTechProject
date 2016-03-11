@@ -5,9 +5,11 @@ from mainapp.models import UserRating
 from mainapp.models import City
 from django.db.models import Sum
 from django.db.models import Avg
+from django.db.models import Count
 from mainapp.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
 
 
 def base_profile(request):
@@ -15,8 +17,14 @@ def base_profile(request):
 
 
 def index(request):
-    user_list = UserProfile.objects.order_by('-User.avg_rating')[:5]
-    city_list = City.objects.order_by('-name')[:5]
+    user_list = User.objects.select_related().annotate(rating=Avg('userrating__rating')).order_by('-rating')[:5]
+
+    #to round ratings
+    for user in user_list:
+        user.rating = int(user.rating)
+
+    city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
+    
 
     context_dict = {"users": user_list, "cities" : city_list}
 
@@ -54,15 +62,16 @@ def user(request, user_name_slug):
         # Can we find a city name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        user = User.objects.get(slug=user_name_slug)
+        user = User.objects.select_related('UserProfile').get(profile__slug=user_name_slug)
+
         context_dict['user_username'] = user.username
-        context_dict['user_firstname'] = user.firstname
-        context_dict['user_secondname'] = user.secondname
+        context_dict['user_firstname'] = user.first_name
+        context_dict['user_lastname'] = user.last_name
 
         # We also add the city object from the database to the context dictionary.
         # We'll use this in the template to verify that the city exists.
         context_dict['user'] = user
-    except user.DoesNotExist:
+    except User.DoesNotExist:
         # We get here if we didn't find the specified city.
         # Don't do anything - the template displays the "no city" message for us.
         pass
