@@ -7,7 +7,7 @@ from mainapp.models import UserRating
 from mainapp.models import UserProfile
 
 
-admin.site.register(User)
+#admin.site.register(User)
 admin.site.register(City)
 admin.site.register(Hobby)
 admin.site.register(Language)

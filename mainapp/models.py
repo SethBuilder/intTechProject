@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models import Avg
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # this is the model for city
@@ -23,22 +24,23 @@ class City(models.Model):
 
 
 # this is model for user
-class User(models.Model):
-    username = models.CharField(max_length=128, unique=True)
-    email = models.EmailField(max_length=128, unique=True)
-    # password = forms.CharField(max_length=32, widget=forms.PasswordInput)
-    profilepic = models.ImageField(null=True)
-    firstname = models.CharField(max_length=128, null=True)
-    secondname = models.CharField(max_length=128, null=True)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, related_name='profile')
+    profilepic = models.ImageField(blank=True)
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
 
+
     def save(self, *args, **kwargs):
         # Uncomment if you don't want the slug to change every time the name changes
+        self.slug = slugify(self.user.username)
+        super(UserProfile, self).save(*args, **kwargs)
 
-        @property
-        def avg_rating(self):
-            return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
+    def __unicode__(self):
+        return self.user.username
+
+    #def avg_rating(self):
+        #return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
 
 
 # this is the model for hobbies - one to many relationship with User
@@ -70,23 +72,12 @@ class Language(models.Model):
 # this is the model for user ratings - one to many relationship with User
 class UserRating(models.Model):
     user = models.ForeignKey(User)
-    comment = models.CharField(max_length=500)
-    for_username = models.CharField(max_length=128)
-    rating = models.IntegerField(default=5)
+    comment = models.CharField(max_length=500, blank=True)
+    rating = models.IntegerField(default=0,validators=[MaxValueValidator(10),MinValueValidator(0)
+        ])
 
     def __unicode__(self):
         return unicode(self.rating)
-
-#this is the model for user profile-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-
-    website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __unicode__(self):
-        return self.user.username
 
 
 
