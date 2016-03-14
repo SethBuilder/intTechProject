@@ -45,6 +45,10 @@ def city(request, city_name_slug):
         # We also add the city object from the database to the context dictionary.
         # We'll use this in the template to verify that the city exists.
         context_dict['city'] = city
+        
+        user_list = User.objects.filter(profile__city=city)
+        context_dict = {"users": user_list}
+        
     except city.DoesNotExist:
         # We get here if we didn't find the specified city.
         # Don't do anything - the template displays the "no city" message for us.

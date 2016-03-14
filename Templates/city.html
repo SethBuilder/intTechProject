@@ -2,7 +2,7 @@
 <html>
     <head>
         {% if city %}
-        <title>Excurj - {{ city_name }}</title>
+        <title>Excurj - {{ city }}</title>
         {% else %}
         <title>Excurj - City does not exist!</title>
         {% endif %}
@@ -10,9 +10,16 @@
 
     <body>
         {% if city %}
-        <h1>{{ city_name }}</h1>
+        <h1>{{ city }}</h1>
         {% else %}
             The specified city {{ city_name }} does not exist!
         {% endif %}
+        
+        {% for user in users %}
+        
+        <p>{{ user.profile.slug }} - {{ user.profile.city }}</p>
+        
+        {% endfor %}
+        
     </body>
 </html>
