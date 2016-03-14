@@ -35,16 +35,16 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
+                        {% else %}
                         <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
-                        <li><a href="{% url 'registration_register' %}" class="pull-right">Sign up</a></li>
-                        <li></li><a href="{% url 'auth_logout' %}?next=/accounts/logout/">Log Out</a></li>
+                        <li><a href="{% url 'registration_register' %}" class="pull-right">Sign Up</a></li>
+                        {% endif %}
                     </ul>
-
                 </div>
         </nav>
-
 </div>
-
 
 {% block content %}{% endblock content %}
 

@@ -31,6 +31,5 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name="index"),
     url(r'^city/(?P<city_name_slug>\w+)$', views.city, name='city'),
     url(r'^user/(?P<user_name_slug>\w+)$', views.user, name='user'),
-    url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_Sign Up'),
+    url(r'^', include('registration.backends.simple.urls')),
     )
