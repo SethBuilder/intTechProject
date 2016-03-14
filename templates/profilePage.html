@@ -1,13 +1,21 @@
-{% extends baseTemplate %}
+{% extends "baseTemplate.html" %}
+{% load staticfiles %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% block content %}
 
-</head>
-<body>
+    <div class="jumbotron" id="profile-jumbotron">
+        <!-- Replace with city title variable -->
+        <div class="container" id="city-title">Glasgow</div>
+    </div>
+
+        <img class="img-responsive img-circle center-element" src="{% static "images/Profile Pictures/example2.jpg" %}"
+             id="profilePic">
+
+    <div class="profile-body">
+
+        <h2 class="profile-name">User's Name</h2>
 
 
-</body>
-</html>
+    </div>
+
+{% endblock content %}
