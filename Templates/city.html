@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% if city %}
-        <title>Excurj - {{ city.name }}</title>
-        {% else %}
-        <title>Excurj - City does not exist!</title>
-        {% endif %}
-    </head>
+{% extends "baseTemplate.html" %} {% block content %}
 
-    <body>
-        {% if city %}
-        <h1>{{ city.name }}</h1>
-        {% else %}
-            The specified city does not exist!
-        {% endif %}
-        
-        {% for user in users %}
-        
+<div class="learn-more">
+    {% if city %}
+        <h1>{{ city.name }}</h1> 
+    {% else %} 
+        The specified city does not exist!
+    {% endif %}
+    {% for user in users %}
         <p>{{ user.profile.slug }} - {{ user.profile.city }}</p>
-        
-        {% endfor %}
-        
-    </body>
-</html>
+    {% endfor %}
+</div>
+
+{% endblock content %}
