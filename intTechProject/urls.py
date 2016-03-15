@@ -18,7 +18,6 @@ from django.contrib import admin
 from intTechProject import views
 from django.conf.urls import include
 from registration.backends.simple.views import RegistrationView
-from registration.backends.simple.views import RegistrationView
 
 # Create a new class that redirects the user to the index page, if successful at logging
 class MyRegistrationView(RegistrationView):
