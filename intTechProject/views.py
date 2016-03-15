@@ -13,7 +13,11 @@ from django.contrib.auth.models import User
 
 
 def base_profile(request):
-    return render(request, 'profilePage.html')
+    return render(request, 'profilePage.html', {"name": "Blair Calderwood",
+                                                "hobbies": ["Drinking", "Stuff", "Climbing", "Not doing uni work",
+                                                            "SLIDES"], "languages": ["English", "French", "Spanish",
+                                                                                     "Afrikaans"],
+                                                "rating_range": range(5)})
 
 
 def index(request):
@@ -23,10 +27,12 @@ def index(request):
    # for user in user_list:
     #    user.rating = int(user.rating)
 
-    city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
-    
+    # for user in user_list:
+        # user.rating_range = range(user.rating)
 
-    context_dict = {"users": user_list, "cities" : city_list}
+    city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
+
+    context_dict = {"users": user_list, "cities": city_list, }
 
     return render(request, "index.html", context_dict)
 

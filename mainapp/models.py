@@ -30,7 +30,6 @@ class UserProfile(models.Model):
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
 
-
     def save(self, *args, **kwargs):
         # Uncomment if you don't want the slug to change every time the name changes
         self.slug = slugify(self.user.username)
