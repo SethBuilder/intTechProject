@@ -20,8 +20,8 @@ def index(request):
     user_list = User.objects.select_related().annotate(rating=Avg('userrating__rating')).order_by('-rating')[:5]
 
     #to round ratings
-    for user in user_list:
-        user.rating = int(user.rating)
+   # for user in user_list:
+    #    user.rating = int(user.rating)
 
     city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
     

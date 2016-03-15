@@ -73,7 +73,7 @@ class Language(models.Model):
 class UserRating(models.Model):
     user = models.ForeignKey(User)
     comment = models.CharField(max_length=500, blank=True)
-    rating = models.IntegerField(default=0,validators=[MaxValueValidator(10),MinValueValidator(0)
+    rating = models.IntegerField(default=0,validators=[MaxValueValidator(5),MinValueValidator(0)
         ])
 
     def __unicode__(self):
