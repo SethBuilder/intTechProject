@@ -40,11 +40,14 @@ def city(request, city_name_slug):
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
         city = City.objects.get(slug=city_name_slug)
-        context_dict['city_name'] = city.name
-
+        
         # We also add the city object from the database to the context dictionary.
         # We'll use this in the template to verify that the city exists.
-        context_dict['city'] = city
+        #context_dict['city'] = city
+        
+        user_list = User.objects.filter(profile__city=city)
+        context_dict = {"users": user_list, "city": city}
+        
     except city.DoesNotExist:
         # We get here if we didn't find the specified city.
         # Don't do anything - the template displays the "no city" message for us.

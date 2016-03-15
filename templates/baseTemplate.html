@@ -11,6 +11,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
 
 </head>
@@ -31,21 +32,25 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a href="#superstars" class="text-center">Super Stars</a></li>
-                        <li><a href="#" class="text-center">Popular Cities</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="#" class="text-center">Messages</a></li>
+                        {% else %}
+                        <li><a href="#" class="text-center">About</a></li>
+                        {% endif %}
+                        <li><a href="#" class="text-center">Travel Stories</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
+                        {% else %}
                         <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
-                        <li><a href="{% url 'registration_register' %}" class="pull-right">Sign up</a></li>
-                        <li></li><a href="{% url 'auth_logout' %}?next=/accounts/logout/">Log Out</a></li>
+                        <li><a href="{% url 'registration_register' %}" class="pull-right">Sign Up</a></li>
+                        {% endif %}
                     </ul>
-
                 </div>
         </nav>
-
 </div>
-
 
 {% block content %}{% endblock content %}
 
