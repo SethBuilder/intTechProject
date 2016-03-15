@@ -88,6 +88,9 @@ def user(request, user_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'user.html', context_dict)
     
+def search(request): 
+    return render(request, 'search.html')   
+    
 """
 def signup(request):
 
