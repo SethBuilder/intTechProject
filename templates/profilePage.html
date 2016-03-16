@@ -16,7 +16,7 @@
         <div class="row">
 
             <div class="col-md-5">
-                <h2 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h2>
+                <h2 class="profile-name">{{ user_profile.first_name }} {{ user_profile.last_name }}</h2>
 
                 <h3 class="profile-second-row">Rating -
                     {% for i in average_ratings %}
@@ -40,7 +40,7 @@
                     <div class="col-md-6">
                         <h3>Hobbies</h3>
                         <ul>
-                            {% for hobby in user.hobbies %}
+                            {% for hobby in hobbies %}
 
                                 <li>{{ hobby }}</li>
 
@@ -53,7 +53,7 @@
                     <div class="col-md-6">
                         <h3>Languages</h3>
                         <ul>
-                            {% for language in user.languages %}
+                            {% for language in languages %}
 
                                 <li>{{ language }}</li>
 

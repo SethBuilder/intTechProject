@@ -22,8 +22,10 @@ def base_profile(request):
         average_counter += rating.rating
     user_average_rating = average_counter / len(user_rating)
 
-    return render(request, 'profilePage.html', {"user": user_profile, "ratings": user_rating,
-                                                "average_ratings": range(user_average_rating)})
+    return render(request, 'profilePage.html', {"user_profile": user_profile.user, "ratings": user_rating,
+                                                "average_ratings": range(user_average_rating),
+                                                "hobbies": user_profile.hobbies.all(),
+                                                "languages": user_profile.languages.all()})
 
 
 def index(request):

@@ -23,9 +23,41 @@ class City(models.Model):
         return self.name
 
 
+# this is the model for hobbies - one to many relationship with User
+class Hobby(models.Model):
+    hobby = models.CharField(max_length=128)
+
+    def save(self, *args, **kwargs):
+        # if self.id is None:
+        # self.slug = slugify(self.name)
+        self.slug = slugify(self.hobby)
+        super(Hobby, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.hobby
+
+
+# this is the model for languages - one to many relationship with User
+class Language(models.Model):
+    language = models.CharField(max_length=128)
+
+    def save(self, *args, **kwargs):
+        # if self.id is None:
+        # self.slug = slugify(self.name)
+        self.slug = slugify(self.language)
+        super(Language, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.language
+
+
 # this is model for user
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
+
+    hobbies = models.ManyToManyField(Hobby)
+    languages = models.ManyToManyField(Language)
+
     profilepic = models.ImageField(upload_to='profile_images', blank=True)
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
@@ -40,30 +72,6 @@ class UserProfile(models.Model):
 
     #def avg_rating(self):
         #return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
-
-
-# this is the model for hobbies - one to many relationship with User
-class Hobby(models.Model):
-    users = models.ManyToManyField(User)
-    hobby = models.CharField(max_length=128)
-
-    def save(self, *args, **kwargs):
-        # if self.id is None:
-        # self.slug = slugify(self.name)
-        self.slug = slugify(self.username)
-        super(Hobby, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        return self.hobby
-
-
-# this is the model for languages - one to many relationship with User
-class Language(models.Model):
-    users = models.ManyToManyField(User)
-    language = models.CharField(max_length=128)
-
-    def __unicode__(self):
-        return self.language
 
 
 # this is the model for user ratings - one to many relationship with User
