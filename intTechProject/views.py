@@ -10,6 +10,7 @@ from mainapp.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 def base_profile(request):
@@ -121,9 +122,11 @@ def search(request):
         else:
             try:
                 cities = City.objects.filter(name__icontains=q)
-                return city(request, q)
+                users = User.objects.filter(Q(username__icontains=q) | Q(first_name__icontains=q))
+                #return city(request, q)
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
             except:
-                return render(request, 'search_results.html', {'cities': cities, 'query': q})
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
                 
     return render(request, 'search_form.html',
         {'error': error})        
