@@ -12,23 +12,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 
 
-def base_profile(request):
-
-    user_profile = UserProfile.objects.all()[0]
-    user_rating = UserRating.objects.filter(user=user_profile)
-
-    average_counter = 0
-    for rating in user_rating:
-        print rating.rating_user
-        average_counter += rating.rating
-    user_average_rating = average_counter / len(user_rating)
-
-    return render(request, 'profilePage.html', {"user_profile": user_profile.user, "ratings": user_rating,
-                                                "average_ratings": range(user_average_rating),
-                                                "hobbies": user_profile.hobbies.all(),
-                                                "languages": user_profile.languages.all()})
-
-
 def index(request):
     user_list = User.objects.select_related().annotate(rating=Avg('userrating__rating')).order_by('-rating')[:5]
 
@@ -80,26 +63,42 @@ def user(request, user_name_slug):
         # Can we find a city name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        user = User.objects.select_related('UserProfile').get(profile__slug=user_name_slug)
+        user_profile = User.objects.select_related('UserProfile').get(profile__slug=user_name_slug)
+        user_profile = UserProfile.objects.get(user=user_profile)
+        user_rating = UserRating.objects.filter(user=user_profile)
 
-        context_dict['user_username'] = user.username
-        context_dict['user_firstname'] = user.first_name
-        context_dict['user_lastname'] = user.last_name
+        average_counter = 0
+        for rating in user_rating:
+            print rating.rating_user
+            average_counter += rating.rating
+        if len(user_rating) > 0:
+            user_average_rating = average_counter / len(user_rating)
+            context_dict['average_ratings'] = range(user_average_rating)
+
+        context_dict['user'] = user_profile
+        context_dict['hobbies'] = user_profile.hobbies.all()
+        context_dict['languages'] = user_profile.languages.all()
+        context_dict['ratings'] = user_rating
+
+        # context_dict['user_username'] = user_profile.username
+        # context_dict['user_firstname'] = user.first_name
+        # context_dict['user_lastname'] = user.last_name
 
         # We also add the city object from the database to the context dictionary.
         # We'll use this in the template to verify that the city exists.
-        context_dict['user'] = user
     except User.DoesNotExist:
         # We get here if we didn't find the specified city.
         # Don't do anything - the template displays the "no city" message for us.
         pass
 
     # Go render the response and return it to the client.
-    return render(request, 'user.html', context_dict)
-    
+    return render(request, 'profilePage.html', context_dict)
+
+
 def search_form(request): 
     return render(request, 'search_form.html')
-    
+
+
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
