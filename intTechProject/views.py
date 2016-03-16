@@ -6,7 +6,7 @@ from mainapp.models import City
 from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import Count
-from mainapp.forms import UserForm, UserProfileForm, CityForm
+from mainapp.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
