@@ -55,8 +55,9 @@
                         <li><a href="{% url 'registration_register' %}" class="pull-right">Sign Up</a></li>
                         <li>
                             <div class="input-group">
-                                <span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
-                                <input type="text" class="form-control" placeholder="Search" aria-describedby="sizing-addon1">
+                                <form action="" method="get">                                
+                                <input type="text" class="form-control" name="q2" placeholder="Search">                                    
+                                </form>    
                             </div>
                         </li>
                         {% endif %}
