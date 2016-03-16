@@ -17,7 +17,7 @@
 #profile-jumbotron {
     height: 40vh;
     background-repeat: no-repeat;
-    background-image: url("/static/images/cityBackgrounds/glasgowAlt.jpg");
+    background-image: url("/static/images/cityBackgrounds/glasgow.jpg");
     background-position: center;
 
 }
@@ -75,10 +75,10 @@
     height: 200px;
 
     position: absolute;
-    top: 30vh;
+    top: 23vh;
     transform: translate(-45%);
 
-    left: 50%;
+    left: 45%;
     margin-left: auto;
     margin-right: auto;
 

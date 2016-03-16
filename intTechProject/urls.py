@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, patterns
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from intTechProject import views
 from django.conf.urls import include
 from registration.backends.simple.views import RegistrationView
