@@ -31,6 +31,13 @@ urlpatterns = patterns('',
     url(r'^city/(?P<city_name_slug>\w+)$', views.city, name='city'),
     url(r'^user/(?P<user_name_slug>\w+)$', views.user, name='user'),
     url(r'^', include('registration.backends.simple.urls')),
+<<<<<<< HEAD
     url(r'^search/', views.search, name="search"),
     url(r'^createprofile/', views.createprofile, name="createprofile"),
+||||||| merged common ancestors
+    url(r'^search/', views.search, name="search"),
+=======
+    url(r'^search-form/$', views.search_form, name="search_form"),
+    url(r'^search/$', views.search, name="search"),
+>>>>>>> ae5c2c6ba0389451ea9faf8dab4f992263e23dc4
     )
