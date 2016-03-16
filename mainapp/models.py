@@ -47,15 +47,13 @@ class Hobby(models.Model):
     users = models.ManyToManyField(User)
     hobby = models.CharField(max_length=128)
 
-    def __unicode__(self):
+    def save(self, *args, **kwargs):
         # if self.id is None:
         # self.slug = slugify(self.name)
         self.slug = slugify(self.username)
-        super(User, self).save(*args, **kwargs)
+        super(Hobby, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.username
-
         return self.hobby
 
 
@@ -70,7 +68,7 @@ class Language(models.Model):
 
 # this is the model for user ratings - one to many relationship with User
 class UserRating(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(UserProfile)
     comment = models.CharField(max_length=500, blank=True)
     rating = models.IntegerField(default=0,validators=[MaxValueValidator(5),MinValueValidator(0)
         ])

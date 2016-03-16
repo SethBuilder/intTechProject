@@ -13,11 +13,17 @@ from django.contrib.auth.models import User
 
 
 def base_profile(request):
-    return render(request, 'profilePage.html', {"name": "Blair Calderwood",
-                                                "hobbies": ["Drinking", "Stuff", "Climbing", "Not doing uni work",
-                                                            "SLIDES"], "languages": ["English", "French", "Spanish",
-                                                                                     "Afrikaans"],
-                                                "rating_range": range(5)})
+
+    user_profile = UserProfile.objects.all()[0]
+    user_rating = UserRating.objects.filter(user=user_profile)
+
+    average_counter = 0
+    for rating in user_rating:
+        average_counter += rating.rating
+    user_average_rating = average_counter / len(user_rating)
+
+    return render(request, 'profilePage.html', {"user": user_profile, "ratings": user_rating,
+                                                "average_ratings": range(user_average_rating)})
 
 
 def index(request):
