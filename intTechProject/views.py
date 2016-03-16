@@ -98,7 +98,7 @@ def search(request):
         return render(request, 'search_results.html',
             {'cities': cities, 'query': q})
     else:
-        return HttpResponse('Please submit a search term.')  
+        return render(request, 'search_form.html', {'error': True})
     
 def createprofile(request):
     return render(request, 'createprofile.html')
