@@ -26,7 +26,7 @@ class City(models.Model):
 # this is model for user
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
-    profilepic = models.ImageField(blank=True)
+    profilepic = models.ImageField(upload_to='profile_images', blank=True)
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
 
