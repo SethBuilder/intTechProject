@@ -62,6 +62,9 @@ class UserProfile(models.Model):
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
 
+    average_rating = models.IntegerField(default=0)
+    ratings_count = models.IntegerField(default=0)
+
     def save(self, *args, **kwargs):
         # Uncomment if you don't want the slug to change every time the name changes
         self.slug = slugify(self.user.username)
@@ -69,6 +72,21 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+    def update_average_rating(self, new_rating, *args, **kwargs):
+
+        old_total = self.average_rating * self.ratings_count
+
+        self.ratings_count += 1
+
+        # Find new average
+        self.average_rating = (old_total + new_rating) / self.ratings_count
+        print self.user.first_name + str(self.average_rating)
+        super(UserProfile, self).save(*args, **kwargs)
+
+    def get_range_average(self):
+        print self.average_rating
+        return range(self.average_rating)
 
     #def avg_rating(self):
         #return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
@@ -82,8 +100,15 @@ class UserRating(models.Model):
     rating = models.IntegerField(default=0,validators=[MaxValueValidator(5), MinValueValidator(0)
         ])
 
+    def save(self, *args, **kwargs):
+        self.user.update_average_rating(self.rating)
+        super(UserRating, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return unicode(self.rating)
+
+    def get_range(self):
+        return range(self.rating)
 
 
 

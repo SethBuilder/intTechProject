@@ -5,7 +5,7 @@
 
     <div class="jumbotron" id="profile-jumbotron">
         <!-- Replace with city title variable -->
-        <div class="container" id="city-title">Glasgow</div>
+        <div class="container" id="city-title">{{ user.city }}</div>
     </div>
 
     <img class="img-responsive img-circle center-element" src="{% static "images/maleProfile1.jpg" %}"
@@ -21,19 +21,31 @@
                 <h3 class="profile-second-row">Rating -
                     {% for i in average_ratings %}
                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+
+                        {% empty %}
+                    {{ user.user.first_name }} has no reviews yet.
                     {% endfor %}
                 </h3>
 
-            {% for rating in ratings %}
-                <h4>{{ rating.rating_user }}</h4>
-            <p>{{ rating.comment }}</p>
-            {% endfor %}
+                {% for rating in ratings %}
+                    <h4>
+                        <a href="{% url 'user' rating.rating_user %}">{{ rating.rating_user }}</a>
+                        {% for i in rating.get_range %}
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        {% endfor %}
+                    </h4>
+                    <p>{{ rating.comment }}</p>
+
+                {% endfor %}
+
+            <h4 id="leaveRating" class="button"><a>Leave a rating</a></h4>
 
             </div>
 
             <div class="col-md-5 pull-right">
 
-                <h4 class="homePageList pull-right" id="userControls"><a href="">Contact this user</a> - <a href="">Rate this user</a> -
+                <h4 class="homePageList pull-right" id="userControls"><a href="">Contact this user</a> - <a href="">Rate
+                    this user</a> -
                     <a href="">Report this user</a></h4>
 
                 <div class="profile-second-row" id="hobbiesLanguages">
@@ -45,6 +57,10 @@
 
                                 <li>{{ hobby }}</li>
 
+                            {% empty %}
+                                <p>{{ user.user.first_name }} has not entered any hobbies. Please message them if you
+                                    would like to know more.
+                                </p>
                             {% endfor %}
 
                         </ul>
@@ -58,6 +74,10 @@
 
                                 <li>{{ language }}</li>
 
+                            {% empty %}
+                                <p>{{ user.user.first_name }} has not entered any languages. Please message them if you
+                                    would like to know more.
+                                </p>
                             {% endfor %}
 
                         </ul>

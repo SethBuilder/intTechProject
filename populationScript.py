@@ -41,7 +41,7 @@ def create_users():
     # name = re.split(' ', name)
     # cnew_names_file.write(name[0] + '\n')
 
-    for new_person in range(0, 50):
+    for new_person in range(0, 10):
 
         # Create a male profile if random number is 1 (50% chance), female profile otherwise
         if random.randint(0, 1) == 1:
@@ -116,31 +116,35 @@ def create_users():
         # Save the new user
         new_user_profile.save()
 
+
 def leave_reviews():
 
     # Read in random reviews from file
     reviews_file = open("static/populationScriptFiles/reviews.txt", 'r')
     reviews = reviews_file.readlines()
 
-    users_reviewed = []
-
     users = UserProfile.objects.all()
     for new_reviewer in users:
-        for new_review in range(random.randint(0, 5)):
+
+        # Put new_reviewer in users_reviewed so they never review themselves
+        users_reviewed = [new_reviewer]
+
+        for new_review in range(random.randint(1, 5)):
+
             new_rev = reviews[random.randint(0, len(reviews) - 1)].strip()
             new_rev = new_rev.split(', ', 2)
             rev = new_rev[0]
             rating = new_rev[1]
+
             reviewee = users[random.randint(0, len(users) - 1)]
 
             if reviewee not in users_reviewed:
                 rev = UserRating.objects.get_or_create(user=reviewee, rating_user=new_reviewer, comment=rev,
                                                        rating=int(rating))[0]
-                rev.save()
+                # rev.save()
                 users_reviewed.append(reviewee)
 
 
-
 if __name__ == '__main__':
-    #create_users()
+    create_users()
     leave_reviews()

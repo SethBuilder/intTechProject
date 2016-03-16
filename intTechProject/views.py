@@ -1,5 +1,5 @@
 from django.shortcuts import render
-#from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from mainapp.models import UserProfile
 from mainapp.models import UserRating
 from mainapp.models import City
@@ -13,18 +13,15 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-    user_list = User.objects.select_related().annotate(rating=Avg('userrating__rating')).order_by('-rating')[:5]
+    user_list = UserProfile.objects.select_related().annotate(rating=Avg('rated_user__rating')).order_by('-rating')[:5]
 
-    #to round ratings
-   # for user in user_list:
-    #    user.rating = int(user.rating)
-
+    # to round ratings
     # for user in user_list:
-        # user.rating_range = range(user.rating)
+    #    user.rating = int(user.rating)
 
     city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
 
-    context_dict = {"users": user_list, "cities": city_list, }
+    context_dict = {"users": user_list, "cities": city_list,}
 
     return render(request, "index.html", context_dict)
 
@@ -38,14 +35,14 @@ def city(request, city_name_slug):
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
         city = City.objects.get(slug=city_name_slug)
-        
+
         # We also add the city object from the database to the context dictionary.
         # We'll use this in the template to verify that the city exists.
-        #context_dict['city'] = city
-        
+        # context_dict['city'] = city
+
         user_list = User.objects.filter(profile__city=city)
         context_dict = {"users": user_list, "city": city}
-        
+
     except city.DoesNotExist:
         # We get here if we didn't find the specified city.
         # Don't do anything - the template displays the "no city" message for us.
@@ -53,8 +50,8 @@ def city(request, city_name_slug):
 
     # Go render the response and return it to the client.
     return render(request, 'city.html', context_dict)
-    
-    
+
+
 def user(request, user_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
@@ -67,18 +64,12 @@ def user(request, user_name_slug):
         user_profile = UserProfile.objects.get(user=user_profile)
         user_rating = UserRating.objects.filter(user=user_profile)
 
-        average_counter = 0
-        for rating in user_rating:
-            print rating.rating_user
-            average_counter += rating.rating
-        if len(user_rating) > 0:
-            user_average_rating = average_counter / len(user_rating)
-            context_dict['average_ratings'] = range(user_average_rating)
-
         context_dict['user'] = user_profile
         context_dict['hobbies'] = user_profile.hobbies.all()
         context_dict['languages'] = user_profile.languages.all()
         context_dict['ratings'] = user_rating
+        context_dict['average_ratings'] = user_profile.get_range_average()
+        print user_profile.get_range_average()
 
         # context_dict['user_username'] = user_profile.username
         # context_dict['user_firstname'] = user.first_name
@@ -95,7 +86,7 @@ def user(request, user_name_slug):
     return render(request, 'profilePage.html', context_dict)
 
 
-def search_form(request): 
+def search_form(request):
     return render(request, 'search_form.html')
 
 
@@ -104,9 +95,9 @@ def search(request):
         q = request.GET['q']
         books = City.objects.filter(name__icontains=q)
         return render(request, 'search_results.html',
-            {'books': books, 'query': q})
+                      {'books': books, 'query': q})
     else:
-        return HttpResponse('Please submit a search term.')  
+        return HttpResponse('Please submit a search term.')
 
 
 def createprofile(request):
