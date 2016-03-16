@@ -96,10 +96,12 @@ def search(request):
         if not q:
             error = True
         else:
-            cities = City.objects.filter(name__icontains=q)
-            # The two lines below will return a search results page OR an exact city view
-            #return render(request, 'search_results.html', {'cities': cities, 'query': q})
-            return city(request, q)
+            try:
+                cities = City.objects.filter(name__icontains=q)
+                return city(request, q)
+            except:
+                return render(request, 'search_results.html', {'cities': cities, 'query': q})
+                
     return render(request, 'search_form.html',
         {'error': error})        
     
