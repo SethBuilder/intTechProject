@@ -6,7 +6,7 @@ from mainapp.models import City
 from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import Count
-from mainapp.forms import UserForm, UserProfileForm
+from mainapp.forms import UserForm, UserProfileForm, CityForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -88,8 +88,17 @@ def user(request, user_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'user.html', context_dict)
     
-def search(request): 
-    return render(request, 'search.html')   
+def search_form(request): 
+    return render(request, 'search_form.html')
+    
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        books = City.objects.filter(name__icontains=q)
+        return render(request, 'search_results.html',
+            {'books': books, 'query': q})
+    else:
+        return HttpResponse('Please submit a search term.')  
     
 """
 def signup(request):
