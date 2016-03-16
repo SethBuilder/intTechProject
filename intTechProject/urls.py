@@ -19,6 +19,7 @@ from intTechProject import views
 from django.conf.urls import include
 from registration.backends.simple.views import RegistrationView
 
+
 # Create a new class that redirects the user to the index page, if successful at logging
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, request, user):
@@ -31,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^city/(?P<city_name_slug>\w+)$', views.city, name='city'),
     url(r'^user/(?P<user_name_slug>\w+)$', views.user, name='user'),
     url(r'^', include('registration.backends.simple.urls')),
+    url(r'^search/', views.search, name="search"),
+    url(r'^createprofile/', views.createprofile, name="createprofile"),
+    url(r'^search/', views.search, name="search"),
     url(r'^search-form/$', views.search_form, name="search_form"),
-    url(r'^search/$', views.search, name="search"),
-    )
+    url(r'^search/$', views.search, name="search"), )
