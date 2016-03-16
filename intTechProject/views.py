@@ -122,7 +122,7 @@ def search(request):
         else:
             try:
                 cities = City.objects.filter(name__icontains=q)
-                users = User.objects.filter(Q(username__icontains=q) | Q(first_name__icontains=q))
+                users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
                 #return city(request, q)
                 return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
             except:
