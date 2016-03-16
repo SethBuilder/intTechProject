@@ -9,20 +9,20 @@
 
 <h1>Search</h1>
 
-<body>
     <p>You searched for: <strong>{{ query }}</strong></p>
 
-{% if books %}
+{% if cities %}
     
     <ul>
-        {% for book in books %}
-        <li>{{ book.name }}</li>
+        {% for city in cities %}
+        <li><a href="{% url 'city' city.slug %}">{{ city.name }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
-    <p>No books matched your search criteria.</p>
+    <p>No city was found.</p>
 {% endif %}
+
 </body>
-</body>
+
 </html>
 
