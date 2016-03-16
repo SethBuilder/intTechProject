@@ -12,6 +12,9 @@
 <h1>Search</h1>
 
 <body>
+    {% if error %}
+        <p style="color: red;">Please submit a search term.</p>
+    {% endif %}
     <form action="/search/" method="get">
         <input type="text" name="q">
         <input type="submit" value="Search">
