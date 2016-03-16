@@ -36,6 +36,7 @@
                             {% for user in users %}
 
 
+
                                 <li><p><a href="user/{{ user.profile.slug }}"
                                        style="color:rgba(0,0,200,1.00)"
                                        class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>
@@ -45,6 +46,7 @@
                                         {{ user.profile.city.name }}</a>,
                                     <span class="homePageList">{{ user.profile.city.country }}.</span><span
                                             class="stars">{{ user.rating }}</span>
+
                                 </p></li>
 
 
