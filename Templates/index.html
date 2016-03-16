@@ -36,7 +36,7 @@
                             {% for user in users %}
                             
                             
-                                <li><p><a href="user/{{ user.profile.slug }}"
+                                <li><p><img class="image">{{ user.profilepic }}</img><a href="user/{{ user.profile.slug }}"
                                           style="color:rgba(0,0,200,1.00)">{{ user.first_name }} {{ user.last_name }}</a>
                                     from <a href="city/{{ user.profile.city.slug }}"
                                             style="color:rgba(0,0,200,1.00)">{{ user.profile.city.name }}</a>, {{ user.profile.city.country }}. <span class="stars">{{ user.rating }} </span> 
