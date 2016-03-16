@@ -88,17 +88,19 @@ def user(request, user_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'user.html', context_dict)
     
-def search_form(request): 
-    return render(request, 'search_form.html')
-    
+
 def search(request):
-    if 'q' in request.GET and request.GET['q']:
+    error = False
+    if 'q' in request.GET:
         q = request.GET['q']
-        cities = City.objects.filter(name__icontains=q)
-        return render(request, 'search_results.html',
-            {'cities': cities, 'query': q})
-    else:
-        return render(request, 'search_form.html', {'error': True})
+        if not q:
+            error = True
+        else:
+            cities = City.objects.filter(name__icontains=q)
+            return render(request, 'search_results.html',
+                {'cities': cities, 'query': q})
+    return render(request, 'search_form.html',
+        {'error': error})        
     
 def createprofile(request):
     return render(request, 'createprofile.html')
