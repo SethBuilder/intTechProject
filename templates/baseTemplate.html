@@ -53,6 +53,12 @@
                         {% else %}
                         <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
                         <li><a href="{% url 'registration_register' %}" class="pull-right">Sign Up</a></li>
+                        <li>
+                            <div class="input-group">
+                                <span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
+                                <input type="text" class="form-control" placeholder="Search" aria-describedby="sizing-addon1">
+                            </div>
+                        </li>
                         {% endif %}
                     </ul>
                 </div>
