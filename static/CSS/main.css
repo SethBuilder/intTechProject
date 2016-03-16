@@ -104,6 +104,10 @@
     outline: 0 none;
 }
 
+#extraglow {
+    text-shadow: 2px 2px 8px #000000;
+}
+
 .profile-body {
     padding-left: 2%;
     padding-right: 2%;
