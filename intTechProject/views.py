@@ -21,6 +21,10 @@ def base_profile(request):
 
 
 def index(request):
+    
+
+
+
     user_list = User.objects.select_related().annotate(rating=Avg('userrating__rating')).order_by('-rating')[:5]
 
     #to round ratings
@@ -33,8 +37,27 @@ def index(request):
     city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
 
     context_dict = {"users": user_list, "cities": city_list, }
+    
+    
+    
+    error = False
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if not q:
+            error = True
+        else:
+            try:
+                cities = City.objects.filter(name__icontains=q)
+                return city(request, q)
+            except:
+                return render(request, 'search_results.html', {'cities': cities, 'query': q})
+                
 
     return render(request, "index.html", context_dict)
+    
+    
+    
+    
 
 
 def city(request, city_name_slug):
