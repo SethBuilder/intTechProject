@@ -25,6 +25,7 @@
                 </h3>
 
             {% for rating in ratings %}
+                <h4>{{ rating.rating_user }}</h4>
             <p>{{ rating.comment }}</p>
             {% endfor %}
 

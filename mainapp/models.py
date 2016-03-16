@@ -76,9 +76,10 @@ class UserProfile(models.Model):
 
 # this is the model for user ratings - one to many relationship with User
 class UserRating(models.Model):
-    user = models.ForeignKey(UserProfile)
+    user = models.ForeignKey(UserProfile, related_name="rated_user")
+    rating_user = models.ForeignKey(UserProfile, related_name="rating_user")
     comment = models.CharField(max_length=500, blank=True)
-    rating = models.IntegerField(default=0,validators=[MaxValueValidator(5),MinValueValidator(0)
+    rating = models.IntegerField(default=0,validators=[MaxValueValidator(5), MinValueValidator(0)
         ])
 
     def __unicode__(self):

@@ -19,6 +19,7 @@ def base_profile(request):
 
     average_counter = 0
     for rating in user_rating:
+        print rating.rating_user
         average_counter += rating.rating
     user_average_rating = average_counter / len(user_rating)
 
@@ -107,6 +108,7 @@ def search(request):
             {'books': books, 'query': q})
     else:
         return HttpResponse('Please submit a search term.')  
-    
+
+
 def createprofile(request):
     return render(request, 'createprofile.html')

@@ -27,7 +27,6 @@ class MyRegistrationView(RegistrationView):
 
 urlpatterns = patterns('',
     url(r'^admin/', admin.site.urls),
-    url(r'^baseProfile/', views.base_profile, name="baseProfile"),
     url(r'^$', views.index, name="index"),
     url(r'^city/(?P<city_name_slug>\w+)$', views.city, name='city'),
     url(r'^user/(?P<user_name_slug>\w+)$', views.user, name='user'),
