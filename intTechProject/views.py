@@ -29,7 +29,6 @@ def index(request):
             try:
                 cities = City.objects.filter(name__icontains=q)
                 users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
-                #return city(request, q)
                 
                 searchText = 'Looking for something?'
                 
@@ -44,12 +43,14 @@ def index(request):
                 error = True
             else:
                 try:
-                    cities = City.objects.filter(name__icontains=citysearch)
-                    #return city(request, q)
-                    
-                    searchText = 'Looking for someplace nice?'
-                    
-                    return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText})
+                    try:
+                        return city(request, citysearch)
+                    except:
+                        cities = City.objects.filter(name__icontains=citysearch)
+                        
+                        searchText = 'Looking for someplace nice?'
+                        
+                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText})
                 except:
                     return render(request, 'search_results.html', {'searchText': searchText})
 
