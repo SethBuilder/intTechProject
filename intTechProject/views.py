@@ -35,7 +35,7 @@ def index(request):
                 cities = City.objects.filter(name__icontains=q)
                 return city(request, q)
             except:
-                return render(request, 'search_results.html', {'cities': cities, 'query': q})
+                return render(request, 'search_results_cities.html', {'cities': cities, 'query': q})
 
     else:
         q2 = request.GET.get('q2')
