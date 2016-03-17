@@ -1,8 +1,6 @@
 from django.shortcuts import render
 # from django.contrib.auth.models import User
-from mainapp.models import UserProfile
-from mainapp.models import UserRating
-from mainapp.models import City
+from mainapp.models import UserProfile, UserRating, City, Hobby, Language
 from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import Count
@@ -66,14 +64,18 @@ def city(request, city_name_slug):
         # Can we find a city name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        city = City.objects.get(slug=city_name_slug)
+        city_name = City.objects.get(slug=city_name_slug)
 
         # We also add the city object from the database to the context dictionary.
         # We'll use this in the template to verify that the city exists.
         # context_dict['city'] = city
 
-        user_list = User.objects.filter(profile__city=city)
-        context_dict = {"users": user_list, "city": city}
+        user_list = User.objects.filter(profile__city=city_name).order_by('-profile__average_rating')[:20]
+        hobbies = Hobby.objects.all()
+        languages = Language.objects.all()
+
+        context_dict = {"users": user_list, "city": city_name, "all_hobbies": hobbies, "all_languages": languages}
+        return render(request, 'cityProfile.html', context_dict)
 
     except city.DoesNotExist:
         # We get here if we didn't find the specified city.
