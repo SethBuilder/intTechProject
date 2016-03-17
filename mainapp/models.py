@@ -10,6 +10,7 @@ class City(models.Model):
     # May have to change unique=true here
     name = models.CharField(max_length=128, default="", unique=True)
     country = models.CharField(max_length=128, default="Scotland")
+    information = models.CharField(max_length=3000, default="")
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -35,7 +36,6 @@ class Hobby(models.Model):
 
     def __unicode__(self):
         return self.hobby
-
 
 # this is the model for languages - one to many relationship with User
 class Language(models.Model):

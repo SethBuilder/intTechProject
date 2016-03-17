@@ -13,7 +13,7 @@ from mainapp.models import City, Hobby, UserProfile, Language, UserRating
 
 
 def create_users():
-    cities = ['Glasgow', 'Madrid', 'Stolkholm', 'Sao Paulo', 'Shanghai', 'Paris', 'Munich', 'Budapest']
+    cities = ['Glasgow', 'Madrid', 'Stockholm', 'Sao Paulo', 'Shanghai', 'Paris', 'Munich', 'Budapest']
     countries = ['Scotland', 'Spain', 'Sweden', 'Brazil', 'China', 'France', 'Germany', 'Hungary']
 
     languages = ['English', 'Spanish', 'Swedish', 'Portuguese', 'Chinese', 'French', 'German', 'Hungarian', 'Latin',
@@ -31,6 +31,9 @@ def create_users():
     names_file = open("static/populationScriptFiles/namesLast.txt", 'r')
     last_names = names_file.readlines()
 
+    city_descriptions_file = open("static/populationScriptFiles/cityDescriptions.txt", 'r')
+    city_descriptions = city_descriptions_file.readlines()
+
     # Read in popular hobbies from file
     hobbies_file = open("static/populationScriptFiles/hobbies.txt", 'r')
     hobby_names = hobbies_file.readlines()
@@ -41,7 +44,7 @@ def create_users():
     # name = re.split(' ', name)
     # cnew_names_file.write(name[0] + '\n')
 
-    for new_person in range(0, 10):
+    for new_person in range(0, 100):
 
         # Create a male profile if random number is 1 (50% chance), female profile otherwise
         if random.randint(0, 1) == 1:
@@ -69,10 +72,11 @@ def create_users():
         random_city = random.randint(0, len(cities) - 1)
         city = cities[random_city]
         country = countries[random_city]
+        description = city_descriptions[random_city]
 
         profile_picture = open("static/populationScriptFiles/Images/maleProfile1.jpg", 'r')
 
-        created_city = City.objects.get_or_create(name=city, country=country)[0]
+        created_city = City.objects.get_or_create(name=city, country=country, description=description)[0]
         created_city.country = country
         created_city.save()
 
