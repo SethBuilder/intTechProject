@@ -96,9 +96,17 @@
     left: 50%;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
+#searchBoxGlow {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+    outline: 0 none;
+}
+
+#extraglow {
+    text-shadow: 2px 2px 8px #000000;
+}
 
 .profile-body {
     padding-left: 2%;

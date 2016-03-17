@@ -44,7 +44,7 @@
                         <li><a href="#" class="text-center">About</a></li>
                         {% endif %}
                         <li><a href="#" class="text-center">Travel Stories</a></li>
-                        <li><a href="/search-form/" class="text-center">Search</a></li>
+                        <li><a href="/search/" class="text-center">Search</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -53,6 +53,13 @@
                         {% else %}
                         <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
                         <li><a href="{% url 'registration_register' %}" class="pull-right">Sign Up</a></li>
+                        <li>
+                            <div class="input-group">
+                                <form action="" method="get">                                
+                                <input type="text" class="form-control" name="q2" placeholder="Search">                                    
+                                </form>    
+                            </div>
+                        </li>
                         {% endif %}
                     </ul>
                 </div>

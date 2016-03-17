@@ -10,6 +10,7 @@ from mainapp.forms import UserForm, UserProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 
 def index(request):
@@ -22,8 +23,38 @@ def index(request):
     city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
 
     context_dict = {"users": user_list, "cities": city_list,}
+    context_dict = {"users": user_list, "cities": city_list, }
+
+    error = False
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if not q:
+            error = True
+        else:
+            try:
+                cities = City.objects.filter(name__icontains=q)
+                return city(request, q)
+            except:
+                return render(request, 'search_results.html', {'cities': cities, 'query': q})
+
+    else:
+        q2 = request.GET.get('q2')
+        if not q2:
+            error = True
+        else:
+            try:
+                cities = City.objects.filter(name__icontains=q2)
+                users = User.objects.filter(Q(username__icontains=q2) | Q(profile__slug__icontains=q2) | Q(first_name__icontains=q2) | Q(last_name__icontains=q2))
+                #return city(request, q)
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q2})
+            except:
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q2})
 
     return render(request, "index.html", context_dict)
+
+
+
+
 
 
 def city(request, city_name_slug):
@@ -91,14 +122,22 @@ def search_form(request):
 
 
 def search(request):
-    if 'q' in request.GET and request.GET['q']:
+    error = False
+    if 'q' in request.GET:
         q = request.GET['q']
-        books = City.objects.filter(name__icontains=q)
-        return render(request, 'search_results.html',
-                      {'books': books, 'query': q})
-    else:
-        return HttpResponse('Please submit a search term.')
+        if not q:
+            error = True
+        else:
+            try:
+                cities = City.objects.filter(name__icontains=q)
+                users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
+                #return city(request, q)
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
+            except:
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
 
-
+    return render(request, 'search_form.html',
+        {'error': error})
+    
 def createprofile(request):
     return render(request, 'createprofile.html')
