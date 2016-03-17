@@ -22,7 +22,7 @@ def index(request):
 
     error = False
     if 'q' in request.GET:
-        q = request.GET['q']
+        q = request.GET.get('q')
         if not q:
             error = True
         else:
@@ -30,9 +30,29 @@ def index(request):
                 cities = City.objects.filter(name__icontains=q)
                 users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
                 #return city(request, q)
-                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
+                
+                searchText = 'Looking for something?'
+                
+                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
             except:
-                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q})
+                return render(request, 'search_results.html', {'searchText': searchText})
+            
+    else:
+        if 'city' in request.GET:
+            citysearch = request.GET.get('city')
+            if not citysearch:
+                error = True
+            else:
+                try:
+                    cities = City.objects.filter(name__icontains=citysearch)
+                    #return city(request, q)
+                    
+                    searchText = 'Looking for someplace nice?'
+                    
+                    return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText})
+                except:
+                    return render(request, 'search_results.html', {'searchText': searchText})
+
 
     return render(request, "index.html", context_dict)
 
