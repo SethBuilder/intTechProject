@@ -48,6 +48,11 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
+                        {% if user_profile.city.name == None %}
+                        <li><a href="{% url 'createprofile' %}?next=/" class="pull-right">Create Profile</a></li>
+                        {% else %}
+                        <li><a href="{% url 'createprofile' %}?next=/" class="pull-right">Edit Profile</a></li>
+                        {% endif %}
                         <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
                         {% else %}
                         <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
