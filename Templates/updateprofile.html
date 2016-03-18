@@ -4,13 +4,11 @@
 <br />
 <br />
 <br />
-<h1>A Bit About Yourself!</h1>
-        <form method="post" action="?next=/" enctype="multipart/form-data">
+<h1>Update Personal Info.</h1>
+        <form method="post" action="?next=/">
                 {% csrf_token %}
                  {{ user_form.as_p }}
             	 {{ profile_form.as_p }}
-            	 {{ hobby_form.as_p }}
-            	 {{ language_form.as_p }}
 
                 <input type="submit" value="Submit" />
         </form>

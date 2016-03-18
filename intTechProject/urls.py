@@ -34,5 +34,6 @@ urlpatterns = patterns('',
     url(r'^user/(?P<user_name_slug>\w+)$', views.user, name='user'),
     url(r'^', include('registration.backends.simple.urls')),
     url(r'^createprofile/', views.createprofile, name="createprofile"),
+    url(r'^updateprofile/', views.updateprofile, name="updateprofile"),
     url(r'^search/$', views.search, name="search"), 
     )
