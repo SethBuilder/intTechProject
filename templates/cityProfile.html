@@ -1,0 +1,73 @@
+{% extends "profileCityBase.html" %}
+{% load staticfiles %}
+
+{% block profile_body %}
+
+    <div class="row">
+
+        <div id="cityDescription" class="col-md-12">
+
+            <h2>{{ city.name }}</h2>
+
+            <p class="justified-text">{{ city.information }}</p>
+
+        </div>
+
+    <div id="cityUsersFilter" class="col-md-2">
+        <h3>Filter</h3>
+        <h4>Filter by hobby</h4>
+            <input type="search" placeholder="Search Hobbies">
+        <ul class="filter-ul">
+        {% for hobby in all_hobbies %}
+            <li>
+            <p>
+            <input type="checkbox">
+            {{ hobby }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h4>Filter by Language</h4>
+            <input type="search" placeholder="Search Languages">
+        <ul class="filter-ul">
+        {% for language in all_languages %}
+            <li>
+            <p>
+            <input type="checkbox">
+            {{ language }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+        <div id="cityUsers" class="col-md-10">
+
+            <h3>{{ city.name }}'s Superstars</h3>
+            <table class="table table-striped">
+                {% for user in users %}
+                    <tr>
+                        <td>
+                            <img src="{% static 'images/maleProfile1.jpg' %}" width="40" height="40">
+                            <a href="{% url 'user' user.profile.slug %}"
+                               style="color:rgba(0,0,200,1.00)"
+                               class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>
+                            {% for i in user.profile.get_range_average %}
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            {% endfor %}
+                        </td>
+
+                        <td>
+                            <p>
+                                {% if user.profile.hobbies.all %}
+                                Hobbies:
+                            {% endif %}
+                                {% for hobby in user.profile.hobbies.all %}
+                                    {{ hobby.hobby }}
+                                {% endfor %}
+                            </p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

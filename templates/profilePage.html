@@ -1,16 +1,12 @@
-{% extends "baseTemplate.html" %}
+{% extends "profileCityBase.html" %}
 {% load staticfiles %}
 
-{% block content %}
-
-    <div class="jumbotron" id="profile-jumbotron">
-        <!-- Replace with city title variable -->
-        <div class="container" id="city-title">{{ user.city }}</div>
-    </div>
-
+{% block profile_picture %}
     <img class="img-responsive img-circle center-element" src="{% static "images/maleProfile1.jpg" %}"
          id="profilePic">
+{% endblock %}
 
+{% block profile_body %}
     <div class="profile-body">
 
         <div class="row">
@@ -22,8 +18,8 @@
                     {% for i in average_ratings %}
                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 
-                        {% empty %}
-                    {{ user.user.first_name }} has no reviews yet.
+                    {% empty %}
+                        {{ user.user.first_name }} has no reviews yet.
                     {% endfor %}
                 </h3>
 
@@ -38,7 +34,7 @@
 
                 {% endfor %}
 
-            <h4 id="leaveRating" class="button"><a>Leave a rating</a></h4>
+                <h4 id="leaveRating" class="button"><a>Leave a rating</a></h4>
 
             </div>
 
@@ -58,7 +54,8 @@
                                 <li>{{ hobby }}</li>
 
                             {% empty %}
-                                <p>{{ user.user.first_name }} has not entered any hobbies. Please message them if you
+                                <p>{{ user.user.first_name }} has not entered any hobbies. Please message them if
+                                    you
                                     would like to know more.
                                 </p>
                             {% endfor %}
@@ -75,7 +72,8 @@
                                 <li>{{ language }}</li>
 
                             {% empty %}
-                                <p>{{ user.user.first_name }} has not entered any languages. Please message them if you
+                                <p>{{ user.user.first_name }} has not entered any languages. Please message them if
+                                    you
                                     would like to know more.
                                 </p>
                             {% endfor %}
@@ -90,4 +88,4 @@
         </div>
     </div>
 
-{% endblock content %}
+{% endblock %}
