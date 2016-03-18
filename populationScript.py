@@ -25,7 +25,8 @@ def get_cities():
     for i in range(len(city_names)):
         # new_city_image = open('static/images/cityBackgrounds/' + city_names[i] + '.jpg', 'r')
 
-        created_city = City.objects.get_or_create(name=city_names[i], country=countries[i], information=city_descriptions[i])[0]
+        created_city = City.objects.get_or_create(name=city_names[i], country=countries[i],
+                                                  information=city_descriptions[i])[0]
         # created_city.image = city_images[random_city]
         created_city.save()
         cities.append(created_city)

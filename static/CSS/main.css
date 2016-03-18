@@ -27,9 +27,22 @@
     left: 2%;
     padding-left: 0;
     margin-left: 0;
-    color: white;
+
+}
+
+#city-title{
     font-size: x-large;
     font-family: "Raleway", sans-serif;
+}
+
+#city-title a:link{
+    text-decoration: none;
+    color: white;
+}
+
+#city-title a:visited{
+    text-decoration: none;
+    color: white;
 }
 
 .jumbotron .container {
