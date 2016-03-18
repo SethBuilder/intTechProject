@@ -11,6 +11,7 @@ class City(models.Model):
     name = models.CharField(max_length=128, default="", unique=True)
     country = models.CharField(max_length=128, default="Scotland")
     information = models.CharField(max_length=3000, default="")
+    image = models.ImageField(upload_to='city_images')
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
@@ -36,6 +37,7 @@ class Hobby(models.Model):
 
     def __unicode__(self):
         return self.hobby
+
 
 # this is the model for languages - one to many relationship with User
 class Language(models.Model):
@@ -81,7 +83,6 @@ class UserProfile(models.Model):
 
         # Find new average
         self.average_rating = (old_total + new_rating) / self.ratings_count
-        print self.user.first_name + str(self.average_rating)
         super(UserProfile, self).save(*args, **kwargs)
 
     def get_range_average(self):
