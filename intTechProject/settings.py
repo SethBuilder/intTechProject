@@ -93,6 +93,10 @@ STATICFILES_DIRS = (
     STATIC_PATH,
 )
 
+PROJECT_DIR = os.path.dirname(__file__)
+MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
+MEDIA_URL = '/media/'
+
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
 PASSWORD_HASHERS = (

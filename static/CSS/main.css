@@ -70,28 +70,15 @@
     box-shadow: 10px 5% 15px #833C3D;
 }
 
-#profileNav {
-
-    position: absolute;
-    top: 55vh;
-    width: 100%;
-
-}
-
-#profileNavbar > ul {
-    padding-bottom: 0;
-    padding-top: 0;
-}
-
 .center-element {
     width: 200px;
     height: 200px;
 
     position: absolute;
-    top: 23vh;
-    transform: translate(-45%);
+    transform: translate(-50%, -50%);
+    top: 40vh;
 
-    left: 45%;
+    left: 50%;
     margin-left: auto;
     margin-right: auto;
 
@@ -389,6 +376,10 @@ span.stars span {
 
 #hobbiesLanguages li{
     font-size: larger;
+}
+
+.center-content{
+    text-align: center;
 }
 
 
