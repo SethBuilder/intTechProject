@@ -15,7 +15,11 @@
 }
 
 #profile-jumbotron {
-    height: 45vh;
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-image: url("/static/images/cityBackgrounds/glasgow.jpg");
+    background-position: center;
+
 }
 
 #city-title {
@@ -23,30 +27,15 @@
     left: 2%;
     padding-left: 0;
     margin-left: 0;
-
-}
-
-#city-title{
+    color: white;
     font-size: x-large;
     font-family: "Raleway", sans-serif;
-    position: absolute;
-    top: 5%;
-    left: 2%;
-}
-
-#city-title a:link{
-    text-decoration: none;
-    color: white;
-}
-
-#city-title a:visited{
-    text-decoration: none;
-    color: white;
 }
 
 .jumbotron .container {
     position: relative;
     top: 100px;
+    z-index: 99;
 
 }
 
@@ -68,15 +57,28 @@
     box-shadow: 10px 5% 15px #833C3D;
 }
 
+#profileNav {
+
+    position: absolute;
+    top: 55vh;
+    width: 100%;
+
+}
+
+#profileNavbar > ul {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
 .center-element {
     width: 200px;
     height: 200px;
 
     position: absolute;
-    transform: translate(-50%, -50%);
-    top: 45vh;
+    top: 23vh;
+    transform: translate(-45%);
 
-    left: 50%;
+    left: 45%;
     margin-left: auto;
     margin-right: auto;
 
@@ -85,9 +87,7 @@
 
 .justified-text{
     text-align: justify;
-    margin: 2%;
-    font-family: "Open Sans", Arial, sans-serif;
-    font-size: large;
+    margin: 2%
 }
 
 .filter-ul{
@@ -378,13 +378,4 @@ span.stars span {
     font-size: larger;
 }
 
-.center-content{
-    text-align: center;
-}
 
-.big-image{
-    height: 40vh;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}

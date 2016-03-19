@@ -48,10 +48,10 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                        {% if not user_has_profile %}
-                        <li><a href="{% url 'createprofile' %}" class="pull-right">Create Profile</a></li>
-                        {% else %}
+                        {% if user_has_profile %}
                         <li><a href="{% url 'updateprofile' %}" class="pull-right">Edit Profile</a></li>
+                        {% else %}
+                        <li><a href="{% url 'createprofile' %}" class="pull-right">Create Profile</a></li>
                         {% endif %}
                         <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
                         {% else %}

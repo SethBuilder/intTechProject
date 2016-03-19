@@ -5,9 +5,7 @@
 
     <div class="jumbotron" id="profile-jumbotron">
         <!-- Replace with city title variable -->
-        {% if user.city %}
-            <div class="container" id="city-title"><a href="{% url 'city' user.city|lower %}">{{ user.city }}</a></div>
-        {% endif %}
+        <div class="container" id="city-title">{{ user.city }}</div>
     </div>
 
     {% block profile_picture %}

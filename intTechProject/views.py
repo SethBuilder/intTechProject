@@ -4,12 +4,13 @@ from mainapp.models import UserProfile, UserRating, City, Hobby, Language
 from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import Count
-from mainapp.forms import UserForm, UserProfileForm, HobbyForm, LanguageForm
+from mainapp.forms import UserForm, UserProfileForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 def index(request):
@@ -159,9 +160,7 @@ def createprofile(request):
 
         profile_form = UserProfileForm(data=request.POST)
 
-        hobby_form = HobbyForm(data=request.POST)
-
-        language_form = LanguageForm(data=request.POST)
+ 
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -174,14 +173,12 @@ def createprofile(request):
 
             if 'profilepic' in request.FILES:
                 profile.profilepic = request.FILES['profilepic']
+            else:
+                profile.profilepic = 'static/images/Profile Pictures/basicUser'
 
             profile.save()
 
-            hobby = hobby_form.save()
-            hobby.save()
-
-            language = language_form.save()
-            language.save()
+            profile_form.save_m2m()
 
             registered = True
 
@@ -189,20 +186,43 @@ def createprofile(request):
                 return redirect(request.GET['next'])
 
         else:
-            print user_form.errors, profile_form.errors, hobby_form.errors, language_form.errors
+            print user_form.errors, profile_form.errors
 
         
 
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-        hobby_form = HobbyForm()
-        language_form = LanguageForm()
 
     return render(request,
             'createprofile.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'hobby_form': hobby_form,'language_form': language_form, 'registered': registered} )
+            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
     
 def updateprofile(request):
-    return render(request, 'updateprofile.html',{},)
+  
+    if request.method == 'POST':
+        update_user_form = UpdateUserForm(request.POST, instance=request.user)
+        update_profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if update_user_form.is_valid() and update_profile_form.is_valid():
+
+            update_user_form.save()
+            
+            profile = update_profile_form.save(commit=False)
+
+            profile.save()
+
+            update_profile_form.save_m2m()
+
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        update_user_form = UpdateUserForm(instance=request.user)
+        update_profile_form = UpdateProfileForm(instance=request.user.profile)
+
+    #to check if user registered a profile 
+    user_has_profile = hasattr(request.user,  'profile')
+
+   
+    return render(request, 'updateprofile.html', {'update_user_form' : update_user_form,
+     'update_profile_form' : update_profile_form, 'user_has_profile': user_has_profile})
