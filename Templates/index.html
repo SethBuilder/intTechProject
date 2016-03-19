@@ -37,9 +37,9 @@
                 {% if users %}
                     <ul>
                         {% for user_profile in users %}
-                            <li><p><a href="user/{{ user_profile.slug }}"
+                            <li><p><a href="{% url 'user' user_profile.slug %}"
                                         style="color:rgba(0,0,200,1.00)"
-                                        class="homePageList">{{ user_profile.user.first_name }} {{ user_profile.last_name }}</a>
+                                        class="homePageList">{{ user_profile.user.first_name }}</a>
                                 <span class="homePageList">from</span>
                                 <a href="city/{{ user_profile.city.slug }}" style="color:rgba(0,0,200,1.00)"
                                     class="homePageList">
@@ -62,7 +62,7 @@
                     {% for city in cities %}
                         <li>
                             <p class="homePageList"><a href="{% url 'city' city.slug %}" style="color:rgba(0,0,200,1.00)"
-                                                        class="homePageList">{{ city }}</a>, has {{ city.total }}
+                                                        class="homePageList">{{ city }}</a> has {{ city.total }}
                                 people!
                             </p>
                         </li>
