@@ -3,15 +3,16 @@
 <div class="jumbotron" id="index-jumbotron">
     <div class="container">
         <section class="homePageSearchBar">
-            <form action="" method="get">
+            <form action="{% url 'search' %}" method="get">
                 <div class="form-group">
                     <label for="mainSearchBox">
+
                         {% if user.is_authenticated and firstname_of_logged_user%}
                         <h1 class="text-center" id="extraglow">{{firstname_of_logged_user | title}}! where do you want to go?</h1></label>
                         {%else%}
-                        <h1 class="text-center" id="extraglow">where do you want to go?</h1></label>
-                        {%endif%}
 
+                        <h1 class="text-center" id="extraglow">where do you want to go?</h1></label>
+                        {% endif %}
                         <input type="text" class="form-control input-lg" id="searchBoxGlow" name="city" placeholder="Glasgow">
                 </div>
 
@@ -20,7 +21,6 @@
                         <button type="submit" class="btn btn-default btn-lg btn-block">Find a Guide</button>
                     </div>
                     <div class="col-xs-6">
-                        <!--<button type="submit" class="btn btn-default btn-lg btn-block">Become a Guide</button>-->
                         <a class="btn btn-default btn-lg btn-block" href="{% url 'registration_register' %}" role="button">Become a Guide</a>
                     </div>
                 </div>
@@ -37,9 +37,9 @@
                 {% if users %}
                     <ul>
                         {% for user_profile in users %}
-                            <li><p><a href="user/{{ user_profile.slug }}"
+                            <li><p><a href="{% url 'user' user_profile.slug %}"
                                         style="color:rgba(0,0,200,1.00)"
-                                        class="homePageList">{{ user_profile.user.first_name }} {{ user_profile.last_name }}</a>
+                                        class="homePageList">{{ user_profile.user.first_name }}</a>
                                 <span class="homePageList">from</span>
                                 <a href="city/{{ user_profile.city.slug }}" style="color:rgba(0,0,200,1.00)"
                                     class="homePageList">
@@ -62,7 +62,7 @@
                     {% for city in cities %}
                         <li>
                             <p class="homePageList"><a href="{% url 'city' city.slug %}" style="color:rgba(0,0,200,1.00)"
-                                                        class="homePageList">{{ city }}</a>, has {{ city.total }}
+                                                        class="homePageList">{{ city }}</a> has {{ city.total }}
                                 people!
                             </p>
                         </li>

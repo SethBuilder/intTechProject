@@ -19,14 +19,25 @@ def index(request):
 
     #to check if user registered a profile 
     user_has_profile = hasattr(request.user,  'profile')
+    
+    slug_of_logged_user = None
 
     #to get the firstname of the logged in user to customize greeting
     if request.user.is_authenticated() and not request.user.first_name == None:
         firstname_of_logged_user = request.user.first_name
+        
+        user = User.objects.filter()
+        
+        if user_has_profile:
+            user_profile = getattr(request.user, 'profile')
+            user_profile = getattr(user_profile, 'slug')
+        
+            slug_of_logged_user = user_profile
+        
     else:
-        firstname_of_logged_user= None
+        firstname_of_logged_user = None
 
-    context_dict = {"users": user_list, "cities": city_list, "user_has_profile": user_has_profile,"firstname_of_logged_user" : firstname_of_logged_user,}
+    context_dict = {"users": user_list, "cities": city_list, "user_has_profile": user_has_profile, "firstname_of_logged_user": firstname_of_logged_user, "slug_of_logged_user": slug_of_logged_user}
     
 
     error = False
@@ -36,12 +47,15 @@ def index(request):
             error = True
         else:
             try:
-                cities = City.objects.filter(name__icontains=q)
-                users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
-                
-                searchText = 'Looking for something?'
-                
-                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
+                try: 
+                    return city(request, q)
+                except:
+                    cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
+                    users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
+                    
+                    searchText = 'Looking for something?'
+                    
+                    return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
             except:
                 return render(request, 'search_results.html', {'searchText': searchText})
             
@@ -59,12 +73,9 @@ def index(request):
                         
                         searchText = 'Looking for someplace nice?'
                         
-                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText})
+                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1})
                 except:
-                    return render(request, 'search_results.html', {'searchText': searchText})
-
-    
-
+                    return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1})
 
     return render(request, "index.html", context_dict)
 
@@ -132,6 +143,7 @@ def user(request, user_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'profilePage.html', context_dict)
 
+"""
 def search(request):
     error = False
     if 'q' in request.GET:
@@ -149,7 +161,49 @@ def search(request):
 
     return render(request, 'search_results.html',
         {'error': error})
-   
+"""   
+
+def search(request):
+    error = False
+    if 'q' in request.GET:
+        q = request.GET.get('q')
+        if not q:
+            error = True
+        else:
+            try:
+                try: 
+                    return city(request, q)
+                except:
+                    cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
+                    users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
+                    
+                    searchText = 'Looking for something?'
+                    
+                    return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
+            except:
+                return render(request, 'search_results.html', {'searchText': searchText})
+            
+    else:
+        if 'city' in request.GET:
+            citysearch = request.GET.get('city')
+            if not citysearch:
+                error = True
+            else:
+                try:
+                    try:
+                        return city(request, citysearch)
+                    except:
+                        cities = City.objects.filter(name__icontains=citysearch)
+                        
+                        searchText = 'Looking for someplace nice?'
+                        
+                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1})
+                except:
+                    return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1})
+    
+    return render(request, 'search_results.html')
+
+
 
 def createprofile(request):
 
@@ -194,12 +248,15 @@ def createprofile(request):
         user_form = UserForm()
         profile_form = UserProfileForm()
 
+    
+
     return render(request,
             'createprofile.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
     
 def updateprofile(request):
+
   
     if request.method == 'POST':
         update_user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -223,6 +280,13 @@ def updateprofile(request):
     #to check if user registered a profile 
     user_has_profile = hasattr(request.user,  'profile')
 
+    if user_has_profile:
+            user_profile = getattr(request.user, 'profile')
+            user_profile = getattr(user_profile, 'slug')
+        
+            slug_of_logged_user = user_profile
+
    
     return render(request, 'updateprofile.html', {'update_user_form' : update_user_form,
-     'update_profile_form' : update_profile_form, 'user_has_profile': user_has_profile})
+     'update_profile_form' : update_profile_form, 'user_has_profile': user_has_profile, "slug_of_logged_user": slug_of_logged_user})
+
