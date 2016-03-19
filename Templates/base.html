@@ -1,10 +1,11 @@
 {% extends "baseMess.html" %}
 {% load i18n %}
-{% load url from future %} 
+{% load url from future %}
 {% block bodyclass %}about{% endblock %}
-{% block content %}  
+{% block content %}
 {% endblock %}
 {% block sidebar %}
+{% load inbox %}
 <ul class="subnavilist">
     <li><a href="{% url 'messages_inbox' %} ">&raquo;&nbsp;{% trans "Inbox" %}</a></li>
     <li><a href="{% url 'messages_outbox' %} ">&raquo;&nbsp;{% trans "Sent Messages" %}</a></li>

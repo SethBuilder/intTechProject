@@ -5,7 +5,7 @@
 {% block content %}  
 {% endblock %}
 {% block sidebar %}
-
+{% load inbox %}
 <ul class="subnavilist">
     <li><a href="{% url 'messages_inbox' %} ">&raquo;&nbsp;{% trans "Inbox" %}</a></li>
     <li><a href="{% url 'messages_outbox' %} ">&raquo;&nbsp;{% trans "Sent Messages" %}</a></li>
