@@ -35,12 +35,15 @@ def index(request):
             error = True
         else:
             try:
-                cities = City.objects.filter(name__icontains=q)
-                users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
-                
-                searchText = 'Looking for something?'
-                
-                return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
+                try: 
+                    return city(request, q)
+                except:
+                    cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
+                    users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
+                    
+                    searchText = 'Looking for something?'
+                    
+                    return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
             except:
                 return render(request, 'search_results.html', {'searchText': searchText})
             
@@ -58,12 +61,9 @@ def index(request):
                         
                         searchText = 'Looking for someplace nice?'
                         
-                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText})
+                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1})
                 except:
-                    return render(request, 'search_results.html', {'searchText': searchText})
-
-    
-
+                    return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1})
 
     return render(request, "index.html", context_dict)
 
@@ -131,6 +131,7 @@ def user(request, user_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'profilePage.html', context_dict)
 
+"""
 def search(request):
     error = False
     if 'q' in request.GET:
@@ -148,7 +149,49 @@ def search(request):
 
     return render(request, 'search_results.html',
         {'error': error})
-   
+"""   
+
+def search(request):
+    error = False
+    if 'q' in request.GET:
+        q = request.GET.get('q')
+        if not q:
+            error = True
+        else:
+            try:
+                try: 
+                    return city(request, q)
+                except:
+                    cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
+                    users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
+                    
+                    searchText = 'Looking for something?'
+                    
+                    return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
+            except:
+                return render(request, 'search_results.html', {'searchText': searchText})
+            
+    else:
+        if 'city' in request.GET:
+            citysearch = request.GET.get('city')
+            if not citysearch:
+                error = True
+            else:
+                try:
+                    try:
+                        return city(request, citysearch)
+                    except:
+                        cities = City.objects.filter(name__icontains=citysearch)
+                        
+                        searchText = 'Looking for someplace nice?'
+                        
+                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1})
+                except:
+                    return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1})
+    
+    return render(request, 'search_results.html')
+
+
 
 def createprofile(request):
 

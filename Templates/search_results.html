@@ -9,10 +9,10 @@
         
         <div class="row">
             <div class="col-md-12">
-                {% if users %}
-                <h1>You searched for: <strong>{{ query }}</strong></h1>
-                {% else %}
+                {% if cityOnly %}
                 <h1>Looking for a city to visit? You searched for: <strong>{{ query }}</strong></h1>
+                {% else %}
+                <h1>You searched for: <strong>{{ query }}</strong></h1>
                 {% endif %}
             </div>
         </div>    
@@ -21,10 +21,10 @@
             <div class="col-lg-6">
                 <form action="" method="GET">
                     <div class="input-group">
-                        {% if users %}
-                        <input type="text" class="form-control" name="q" placeholder="{{ searchText }}">
-                        {% else %}
+                        {% if cityOnly %}
                         <input type="text" class="form-control" name="city" placeholder="{{ searchText }}">
+                        {% else %}
+                        <input type="text" class="form-control" name="q" placeholder="{{ searchText }}">
                         {% endif %}
                         <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
@@ -34,7 +34,24 @@
             </div>
         </div>
         
-        {% if users %}
+        {% if cityOnly %}
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Cities</h1> 
+                {% if cities %}
+                <table class="table table-striped">
+                    {% for city in cities %}
+                    <tr><td><a href="{% url 'city' city.slug %}">{{ city.name }}</a></td></tr>
+                {% endfor %} 
+                </table>
+                {% else %}
+                <p>No city was found.</p>
+                {% endif %}
+            </div>
+        </div>
+                
+        {% else %}
         
         <div class="row">
             <div class="col-md-6">
@@ -62,29 +79,11 @@
                 <p>No user was found.</p>
                 {% endif %}
             </div>
-            
-        </div>
-        
-        {% else %}
-        
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Cities</h1> 
-                {% if cities %}
-                <table class="table table-striped">
-                    {% for city in cities %}
-                    <tr><td><a href="{% url 'city' city.slug %}">{{ city.name }}</a></td></tr>
-                {% endfor %} 
-                </table>
-                {% else %}
-                <p>No city was found.</p>
-                {% endif %}
-            </div>
-        </div>
+         </div>   
         
         {% endif %}
         
-    </div>   
+    </div>
     
 </section>
 

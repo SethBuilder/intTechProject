@@ -3,15 +3,14 @@
 <div class="jumbotron" id="index-jumbotron">
     <div class="container">
         <section class="homePageSearchBar">
-            <form action="" method="get">
+            <form action="{% url 'search' %}" method="get">
                 <div class="form-group">
                     <label for="mainSearchBox">
-                        {% if user.is_authenticated and firstname_of_logged_user%}
-                        <h1 class="text-center" id="extraglow">{{firstname_of_logged_user}}! where do you want to go?</h1></label>
-                        {%else%}
+                        {% if user.is_authenticated and firstname_of_logged_user %}
+                        <h1 class="text-center" id="extraglow">{{ firstname_of_logged_user }}! where do you want to go?</h1></label>
+                        {% else %}
                         <h1 class="text-center" id="extraglow">where do you want to go?</h1></label>
-                        {%endif%}
-
+                        {% endif %}
                         <input type="text" class="form-control input-lg" id="searchBoxGlow" name="city" placeholder="Glasgow">
                 </div>
 
@@ -20,7 +19,6 @@
                         <button type="submit" class="btn btn-default btn-lg btn-block">Find a Guide</button>
                     </div>
                     <div class="col-xs-6">
-                        <!--<button type="submit" class="btn btn-default btn-lg btn-block">Become a Guide</button>-->
                         <a class="btn btn-default btn-lg btn-block" href="{% url 'registration_register' %}" role="button">Become a Guide</a>
                     </div>
                 </div>
