@@ -18,14 +18,24 @@ def index(request):
 
     #to check if user registered a profile 
     user_has_profile = hasattr(request.user,  'profile')
+    
+    slug_of_logged_user = None
 
     #to get the firstname of the logged in user to customize greeting
     if request.user.is_authenticated() and not request.user.first_name == None:
         firstname_of_logged_user = request.user.first_name
+        
+        user = User.objects.filter()
+        
+        user_profile = getattr(request.user, 'profile')
+        user_profile = getattr(user_profile, 'slug')
+        
+        slug_of_logged_user = user_profile
+        
     else:
-        firstname_of_logged_user= None
+        firstname_of_logged_user = None
 
-    context_dict = {"users": user_list, "cities": city_list, "user_has_profile": user_has_profile,"firstname_of_logged_user" : firstname_of_logged_user,}
+    context_dict = {"users": user_list, "cities": city_list, "user_has_profile": user_has_profile, "firstname_of_logged_user": firstname_of_logged_user, "slug_of_logged_user": slug_of_logged_user}
     
 
     error = False
