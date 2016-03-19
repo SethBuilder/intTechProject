@@ -35,8 +35,12 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'notification',
+    'mailer',
     'mainapp',
+    'django_messages',
     'registration', # adds the registration package
     
     #'crispy_forms',
@@ -80,6 +84,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID=1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Static files (CSS, JavaScript, Images)
@@ -112,3 +120,10 @@ LOGIN_URL = '/login/'  # The page users are directed to if they are not logged i
                                                                 # and are trying to access pages requiring authentication
 
 
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django_messages.context_processors.inbox',
+
+)

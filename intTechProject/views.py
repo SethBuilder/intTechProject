@@ -206,3 +206,6 @@ def createprofile(request):
     
 def updateprofile(request):
     return render(request, 'updateprofile.html',{},)
+
+
+
