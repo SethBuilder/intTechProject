@@ -4,6 +4,7 @@
     background-size: cover;
     background-attachment: fixed;
     margin-bottom: 0;
+    color: white;
 
 }
 
@@ -12,26 +13,27 @@
     margin-left: 0;
     margin-right: 0;
     background-image: url("../images/Eiffel%20Sunset%203.JPG");
-    background-size:cover;
+    background-size: cover;
 
 }
 
 #profile-jumbotron {
-    height: 40vh;
-    background-repeat: no-repeat;
-    background-image: url("/static/images/cityBackgrounds/glasgow.jpg");
-    background-position: center;
+    height: 45vh;
 
 }
 
 #city-title {
     top: 5%;
     left: 2%;
-    padding-left: 0;
-    margin-left: 0;
-    color: white;
+    position: absolute;
     font-size: x-large;
     font-family: "Raleway", sans-serif;
+    text-decoration: none;
+}
+
+#city-title a{
+        text-decoration: none;
+    color: white;
 }
 
 .jumbotron .container {
@@ -59,45 +61,34 @@
     box-shadow: 10px 5% 15px #833C3D;
 }
 
-#profileNav {
-
-    position: absolute;
-    top: 55vh;
-    width: 100%;
-
-}
-
-#profileNavbar > ul {
-    padding-bottom: 0;
-    padding-top: 0;
-}
-
 .center-element {
     width: 200px;
     height: 200px;
 
     position: absolute;
-    top: 23vh;
-    transform: translate(-45%);
+    top: 45vh;
+    transform: translate(-50%, -50%);
 
-    left: 45%;
+    left: 50%;
     margin-left: auto;
     margin-right: auto;
 
     z-index: 10;
 }
 
-.justified-text{
+.justified-text {
     text-align: justify;
-    margin: 2%
+    margin: 2%;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: large;
 }
 
-.filter-ul{
+.filter-ul {
     height: 200px;
     overflow-y: auto
 }
 
-.filter-ul li{
+.filter-ul li {
     list-style-type: none;
 }
 
@@ -148,7 +139,7 @@
     color: #FCFCFC;
 }
 
-#leaveRating{
+#leaveRating {
     padding-bottom: 4%;
 }
 
@@ -280,7 +271,6 @@ section {
     padding-top: 0;
 }
 
-
 /* below two selectors are for star ratings*/
 span.stars, span.stars span {
     display: block;
@@ -293,76 +283,73 @@ span.stars span {
     background-position: 0 0;
 }
 
-.homePageList{
+.homePageList {
     font-family: "Open Sans", Arial, sans-serif;
 }
 
-#userControls a{
+#userControls a {
     color: black;
 }
 
-.profile-second-row{
+.profile-second-row {
     padding-top: 4%;
 }
 
-#hobbiesLanguages{
+#hobbiesLanguages {
     padding-top: 16%;
 }
 
-#hobbiesLanguages li{
+#hobbiesLanguages li {
     font-size: larger;
 }
 
-
 /*sign up page selectors*/
 
-.reglabel{
+.reglabel {
     margin-top: 10px;
-    margin-left:25px;
+    margin-left: 25px;
     font-family: 'Shift', sans-serif;
-    }
+}
 
-.reglabel.submitbutton{
+.reglabel.submitbutton {
     margin-bottom: 20px;
-    }
+}
 
-
-
-.reglabel.tab{
+.reglabel.tab {
     margin-left: 120px;
 }
 
-.reglabel.lang{
+.reglabel.lang {
     margin-left: 140px;
 }
 
-.textfields{
-    margin-left:25px;
-    }
-.headlabel{
+.textfields {
+    margin-left: 25px;
+}
+
+.headlabel {
     font-family: 'Shift', sans-serif;
     font-size: 30px;
     font-weight: bold;
-    margin-left:15px;
+    margin-left: 15px;
 }
 
-.formboxsignup{
+.formboxsignup {
 
     width: 250px;
     height: inherit;
-    border:solid;
+    border: solid;
     border-width: 1px;
     margin: auto;
     margin-bottom: 50px;
 
 }
 
-
-.formboxlogin{
+.formboxlogin {
 
     width: 250px;
     height: inherit;
-    border:solid;
+    border: solid;
     border-width: 1px;
     margin: auto;
     margin-bottom: 50px;
@@ -370,21 +357,39 @@ span.stars span {
 
 }
 
-.formboxprofile{
+.formboxprofile {
 
     width: 500px;
     height: inherit;
-    border:solid;
+    border: solid;
     border-width: 1px;
     margin: auto;
     margin-bottom: 50px;
-    padding-left:10px;
+    padding-left: 10px;
 }
 
 /*navbar search field selector*/
-.input-group{
+.input-group {
 
     margin-top: 8px;
 
+}
+
+.center-content{
+    text-align: center;
+}
+
+.justified-text {
+    text-align: justify;
+    margin: 2%;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: large;
+}
+
+.big-image {
+    height: 40vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 

@@ -11,6 +11,7 @@ class City(models.Model):
     name = models.CharField(max_length=128, default="", unique=True)
     country = models.CharField(max_length=128, default="Scotland")
     information = models.CharField(max_length=3000, default="")
+    image = models.ImageField(upload_to='city_images')
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

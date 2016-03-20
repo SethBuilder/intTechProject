@@ -54,6 +54,6 @@ urlpatterns = patterns('',
     url(r'^undelete/(?P<message_id>[\d]+)/$', undelete, name='messages_undelete'),
     url(r'^trash/$', trash, name='messages_trash'),
 
-    url(r'^search/$', views.search, name="search"), ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'^search/$', views.search, name="search"), ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -116,7 +116,9 @@ LOGIN_URL = '/login/'  # The page users are directed to if they are not logged i
                                                                 # and are trying to access pages requiring authentication
 
 
-
+PROJECT_DIR = os.path.dirname(__file__)
+MEDIA_ROOT = os.path.join(PROJECT_DIR, "media")
+MEDIA_URL = '/media/'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
