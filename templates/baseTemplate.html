@@ -37,34 +37,37 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-left">
-                        {% if user.is_authenticated and user_has_profile%}
+                        {% if status == 2%}
                         <li><a href="{% url 'user' slug_of_logged_user %}" class="text-center">Profile</a></li>
                         <li><a href="{{ HTTP_HOST }}/messages/" class="text-center">Messages</a></li>
-                        {% else %}
+                        {% elif status == 1%}
+                        <li><a href="{{ HTTP_HOST }}/messages/" class="text-center">Messages</a></li>
+                         {% endif %}
                         <li><a href="#" class="text-center">About</a></li>
-                        {% endif %}
                         <li><a href="#" class="text-center">Travel Stories</a></li>
+                       
+
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        {% if user.is_authenticated %}
-                        {% if user_has_profile %}
+                        {% if status == 2%}
                         <li><a href="{% url 'updateprofile' %}" class="pull-right">Edit Profile</a></li>
-                        {% else %}
+                         <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
+                        {% elif status == 1 %}
                         <li><a href="{% url 'createprofile' %}" class="pull-right">Create Profile</a></li>
-                        {% endif %}
-                        <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
+                         <li><a href="{% url 'auth_logout' %}?next=/logout/" class="pull-right">Log Out</a></li>
                         {% else %}
                         <li><a href="{% url 'auth_login' %}" class="pull-right">Log in</a></li>
                         <li><a href="{% url 'registration_register' %}" class="pull-right">Sign Up</a></li>
+                        {% endif %}
                         <li>
                             <div class="input-group">
                                 <form action="{% url 'search' %}" method="get">                                
-                                <input type="text" class="form-control" name="q" placeholder="Search">                                    
+                                <input type="text" class="form-control" name="q" placeholder="Search Cities and People">                                    
                                 </form>    
                             </div>
                         </li>
-                        {% endif %}
+                        
                     </ul>
                 </div>
         </nav>
