@@ -15,17 +15,6 @@ class UserProfileForm(forms.ModelForm):
             model = UserProfile
             fields = ('profilepic', 'city', 'hobbies', 'languages')
 
-'''class HobbyForm(forms.ModelForm):
-	class Meta:
-		model = Hobby
-		fields = ('hobby',)
-
-class LanguageForm(forms.ModelForm):
-	class Meta:
-		model = Language
-		fields = ('language',)'''
-
-
 
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(required=True)

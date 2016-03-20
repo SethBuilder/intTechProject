@@ -12,6 +12,8 @@
     margin-left: 0;
     margin-right: 0;
     background-image: url("../images/Eiffel%20Sunset%203.JPG");
+    background-size:cover;
+
 }
 
 #profile-jumbotron {
@@ -278,73 +280,6 @@ section {
     padding-top: 0;
 }
 
-#login-dp {
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow: hidden;
-    background-color: rgba(255, 255, 255, .8);
-}
-
-#login-dp .help-block {
-    font-size: 12px
-}
-
-#login-dp .bottom {
-    background-color: white;
-    border-top: 1px solid #ddd;
-    clear: both;
-    padding: 14px;
-}
-
-#login-dp .social-buttons {
-    margin: 12px 0
-}
-
-#login-dp .social-buttons a {
-    width: 49%;
-}
-
-#login-dp .form-group {
-    margin-bottom: 10px;
-}
-
-.btn-fb {
-    color: #fff;
-    background-color: #3b5998;
-}
-
-.btn-fb:hover {
-    color: #fff;
-    background-color: #496ebc
-}
-
-.btn-tw {
-    color: #fff;
-    background-color: #55acee;
-}
-
-.btn-tw:hover {
-    color: #fff;
-    background-color: #59b5fa;
-}
-
-@media (max-width: 768px) {
-    #login-dp {
-        background-color: inherit;
-        color: #fff;
-    }
-
-    #login-dp .bottom {
-        background-color: inherit;
-        border-top: 0 none;
-    }
-}
-
-#login {
-
-    background-color: #efefef;
-    margin-top: 3%;
-}
 
 /* below two selectors are for star ratings*/
 span.stars, span.stars span {
@@ -376,6 +311,74 @@ span.stars span {
 
 #hobbiesLanguages li{
     font-size: larger;
+}
+
+
+/*sign up page selectors*/
+
+.reglabel{
+    margin-top: 10px;
+    margin-left:25px;
+    font-family: 'Shift', sans-serif;
+    }
+
+.reglabel.submitbutton{
+    margin-bottom: 20px;
+    }
+
+
+
+.reglabel.tab{
+    margin-left: 120px;
+}
+
+.reglabel.lang{
+    margin-left: 140px;
+}
+
+.textfields{
+    margin-left:25px;
+    }
+.headlabel{
+    font-family: 'Shift', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left:15px;
+}
+
+.formboxsignup{
+
+    width: 250px;
+    height: inherit;
+    border:solid;
+    border-width: 1px;
+    margin: auto;
+    margin-bottom: 50px;
+
+}
+
+
+.formboxlogin{
+
+    width: 250px;
+    height: inherit;
+    border:solid;
+    border-width: 1px;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 50px;
+
+}
+
+.formboxprofile{
+
+    width: 500px;
+    height: inherit;
+    border:solid;
+    border-width: 1px;
+    margin: auto;
+    margin-bottom: 50px;
+    padding-left:10px;
 }
 
 
