@@ -15,6 +15,8 @@ def get_cities():
 
     city_names = ['Glasgow', 'Madrid', 'Stockholm', 'Sao Paulo', 'Shanghai', 'Paris', 'Munich', 'Budapest']
     countries = ['Scotland', 'Spain', 'Sweden', 'Brazil', 'China', 'France', 'Germany', 'Hungary']
+    lats = [55.865785, 40.422190, 59.333547, -23.548782, 31.227831, 48.856579, 48.136499, 47.501287]
+    longs = [-4.251693, -3.702894, 18.067165, -46.636550, 121.479293, 2.347554, 11.578218, 19.042372]
 
     cities = []
     city_descriptions_file = open("static/populationScriptFiles/cityDescriptions.txt", 'r')
@@ -26,7 +28,8 @@ def get_cities():
         # new_city_image = open('static/images/cityBackgrounds/' + city_names[i] + '.jpg', 'r')
 
         created_city = City.objects.get_or_create(name=city_names[i], country=countries[i],
-                                                  information=city_descriptions[i])[0]
+                                                  information=city_descriptions[i], latitude=lats[i],
+                                                  longitude=longs[i])[0]
         # created_city.image = city_images[random_city]
         created_city.save()
         cities.append(created_city)
