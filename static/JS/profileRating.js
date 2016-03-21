@@ -28,7 +28,7 @@ function saveReview(rated_username, rating_username) {
     var reviewsTable = $("#reviewsTable");
 
     $.get('/submitreview/', {
-        rating_user: rating_username,
+        rating_user: rating_username.toString(),
         rated_user: rated_username,
         comment: reviewComment,
         rating: currentRating.toString()
