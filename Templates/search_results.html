@@ -70,6 +70,7 @@
         
             <div id="cityUsers" class="col-md-6">
                 <h1>Users</h1>
+                {% if users %}
                 <table class="table table-striped">
                     {% for user in users %}
                         <tr>
@@ -81,6 +82,7 @@
                                 {% for i in user.profile.get_range_average %}
                                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                                 {% endfor %}
+                                <p>{{ user.first_name }}</p>
                             </td>
 
                             <td>
@@ -96,6 +98,9 @@
                         </tr>
                     {% endfor %}
                 </table>
+                {% else %}
+                <p>No user was found.</p>
+                {% endif %}
             </div>
         
         {% endif %}
