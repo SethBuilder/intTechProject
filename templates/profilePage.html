@@ -2,8 +2,19 @@
 {% load staticfiles %}
 
 {% block profile_picture %}
-    <img class="img-responsive img-circle center-element" src="{% static "images/maleProfile1.jpg" %}"
+
+    {% if user.profilepic %}
+
+        <img class="img-responsive img-circle center-element" src="{{ user.profilepic.url }}"
          id="profilePic">
+
+    {% else %}
+
+        <img class="img-responsive img-circle center-element" src="{% static "images/maleProfile1.jpg" %}"
+         id="profilePic">
+
+    {% endif %}
+
 {% endblock %}
 
 {% block profile_body %}
