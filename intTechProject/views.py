@@ -31,44 +31,6 @@ def index(request):
         firstname_of_logged_user = None
 
     context_dict = {"users": user_list, "cities": city_list, "firstname_of_logged_user": firstname_of_logged_user, "slug_of_logged_user": slug_of_logged_user, "status":status}
-    
-
-    error = False
-    if 'q' in request.GET:
-        q = request.GET.get('q')
-        if not q:
-            error = True
-        else:
-            try:
-                try: 
-                    return city(request, q)
-                except:
-                    cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
-                    users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
-                    
-                    searchText = 'Looking for something?'
-                    
-                    return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
-            except:
-                return render(request, 'search_results.html', {'searchText': searchText})
-            
-    else:
-        if 'city' in request.GET:
-            citysearch = request.GET.get('city')
-            if not citysearch:
-                error = True
-            else:
-                try:
-                    try:
-                        return city(request, citysearch)
-                    except:
-                        cities = City.objects.filter(name__icontains=citysearch)
-                        
-                        searchText = 'Looking for someplace nice?'
-                        
-                        return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1})
-                except:
-                    return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1})
 
     return render(request, "index.html", context_dict)
 
@@ -152,7 +114,6 @@ def user(request, user_name_slug):
  
 
 def search(request):
-
     #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
