@@ -118,9 +118,8 @@
 }
 
 .profile-body {
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 0;
+    padding: 0 2% 5% 2%;
+
     margin-top: 0;
     border-top: solid;
 }
