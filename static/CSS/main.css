@@ -7,7 +7,9 @@
     color: white;
 
 }
-
+#popularCityTitle{
+    color: black;
+}
 #index-jumbotron {
     height: 490px;
     margin-left: 0;
