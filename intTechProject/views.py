@@ -108,6 +108,10 @@ def city(request, city_name_slug):
     # Go render the response and return it to the client.
     return render(request, 'city.html', context_dict)
 
+def cityLoc(request):
+
+    return render(request, 'cityMap.html' )
+
 
 def user(request, user_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
