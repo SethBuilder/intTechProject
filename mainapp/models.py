@@ -13,6 +13,8 @@ class City(models.Model):
     information = models.CharField(max_length=3000, default="")
     image = models.ImageField(upload_to='city_images')
     slug = models.SlugField(unique=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     def save(self, *args, **kwargs):
         # Uncomment if you don't want the slug to change every time the name changes
@@ -37,6 +39,7 @@ class Hobby(models.Model):
 
     def __unicode__(self):
         return self.hobby
+
 
 # this is the model for languages - one to many relationship with User
 class Language(models.Model):
