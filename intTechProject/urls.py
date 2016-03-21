@@ -26,6 +26,7 @@ from django.views.generic import RedirectView
 from django_messages.views import *
 
 
+
 # Create a new class that redirects the user to the index page, if successful at logging
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, request, user):
@@ -55,6 +56,7 @@ urlpatterns = patterns('',
     url(r'^undelete/(?P<message_id>[\d]+)/$', undelete, name='messages_undelete'),
     url(r'^trash/$', trash, name='messages_trash'),
 
-    url(r'^search/$', views.search, name="search"), ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^search/$', views.search, name="search"),
+    url(r'^list$', views.product_list), ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

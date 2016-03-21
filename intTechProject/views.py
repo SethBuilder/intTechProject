@@ -4,7 +4,7 @@ from mainapp.models import UserProfile, UserRating, City, Hobby, Language
 from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import Count
-from mainapp.forms import UserForm, UserProfileForm, UpdateUserForm, UpdateProfileForm
+from mainapp.forms import UserForm, UserProfileForm, UpdateUserForm, UpdateProfileForm, UserFilter
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -269,3 +269,8 @@ def get_profile_slug(request):
         slug_of_logged_user = None
 
     return slug_of_logged_user
+    
+
+def product_list(request):
+    f = UserFilter(request.GET, queryset=User.objects.all())
+    return render(request, 'filter.html', {'filter': f})    

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from mainapp.models import UserProfile, Hobby, Language, City
 from django.db import models
+import django_filters
 
 class UserForm(forms.ModelForm):
       
@@ -50,3 +51,10 @@ class UpdateProfileForm(forms.ModelForm):
 		if commit:
 			profile.save()
 		return profile
+        
+class UserFilter(django_filters.FilterSet):
+    first_name = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = User
+        fields = ['first_name']                
