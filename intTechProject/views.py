@@ -89,7 +89,7 @@ def user(request, user_name_slug):
         # Can we find a city name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        user_profile = User.objects.select_related('UserProfile').get(profile__slug=user_name_slug)
+        user_profile = User.objects.select_related('profile').get(profile__slug=user_name_slug)
         user_profile = UserProfile.objects.get(user=user_profile)
         user_rating = UserRating.objects.filter(user=user_profile)
 
