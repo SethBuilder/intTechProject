@@ -4,14 +4,30 @@
 {% block content %}
 
     <div class="jumbotron" id="profile-jumbotron">
-        <!-- Replace with city title variable -->
-        <div class="container" id="city-title">{{ user.city }}</div>
+
+        {% if user.city %}
+
+            <img class="big-image" src="{{ user.city.image.url }}">
+
+            <div class="container" id="city-title">{{ user.city }}</div>
+
+        {% else %}
+
+            <img class="big-image" src="{{ city.image.url }}">
+            <div class="container" id="city-title">{{ city.name }}</div>
+
+        {% endif %}
+
     </div>
 
     {% block profile_picture %}
     {% endblock %}
 
-    {% block profile_body %}
-    {% endblock %}
+    <div class="profile-body">
+
+        {% block profile_body %}
+        {% endblock %}
+
+    </div>
 
 {% endblock %}
