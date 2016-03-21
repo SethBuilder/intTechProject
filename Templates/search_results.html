@@ -1,4 +1,5 @@
 {% extends "baseTemplate.html" %}
+{% load staticfiles %}
 {% block content %}
 
 <section>
@@ -67,19 +68,35 @@
                 {% endif %}
             </div>
         
-            <div class="col-md-6">
-                <h1>Users</h1> 
-                {% if users %}
+            <div id="cityUsers" class="col-md-6">
+                <h1>Users</h1>
                 <table class="table table-striped">
-                   {% for user in users %}
-                    <tr><td><a href="{% url 'user' user.username %}">{{ user.username }} - {{ user.first_name }} {{ user.last_name }}</a></td></tr>
-                {% endfor %} 
+                    {% for user in users %}
+                        <tr>
+                            <td>
+                                <img src="{% static 'images/maleProfile1.jpg' %}" width="40" height="40">
+                                <a href="{% url 'user' user.profile.slug %}"
+                                style="color:rgba(0,0,200,1.00)"
+                                class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>
+                                {% for i in user.profile.get_range_average %}
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                {% endfor %}
+                            </td>
+
+                            <td>
+                                <p>
+                                    {% if user.profile.hobbies.all %}
+                                    Hobbies:
+                                {% endif %}
+                                    {% for hobby in user.profile.hobbies.all %}
+                                        {{ hobby.hobby }}
+                                    {% endfor %}
+                                </p>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </table>
-                {% else %}
-                <p>No user was found.</p>
-                {% endif %}
             </div>
-         </div>   
         
         {% endif %}
         
