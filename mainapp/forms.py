@@ -1,19 +1,19 @@
 from django import forms
 from django.contrib.auth.models import User
-from mainapp.models import UserProfile, Hobby, Language, City
+from mainapp.models import UserProfile, Hobby, Language, City, UserRating
 from django.db import models
 
-class UserForm(forms.ModelForm):
-      
 
-        class Meta:
-            model = User
-            fields =  ('first_name', 'last_name')
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
 
 class UserProfileForm(forms.ModelForm):
-        class Meta:
-            model = UserProfile
-            fields = ('profilepic', 'city', 'hobbies', 'languages')
+    class Meta:
+        model = UserProfile
+        fields = ('profilepic', 'city', 'hobbies', 'languages')
 
 
 class UpdateUserForm(forms.ModelForm):
@@ -26,7 +26,6 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'first_name', 'last_name')
 
-
     def save(self, commit=True):
         user = super(UpdateUserForm, self).save(commit=False)
 
@@ -36,17 +35,18 @@ class UpdateUserForm(forms.ModelForm):
         return user
 
 
-
 class UpdateProfileForm(forms.ModelForm):
-	city = models.ForeignKey(City)
+    city = models.ForeignKey(City)
 
-	class Meta:
-		model = UserProfile
-		fields = ('city', 'profilepic', 'hobbies', 'languages')
+    class Meta:
+        model = UserProfile
+        fields = ('city', 'profilepic', 'hobbies', 'languages')
 
-	def save(self, commit=True):
-		profile = super(UpdateProfileForm, self).save(commit=False)
+    def save(self, commit=True):
+        profile = super(UpdateProfileForm, self).save(commit=False)
 
-		if commit:
-			profile.save()
-		return profile
+        if commit:
+            profile.save()
+        return profile
+
+

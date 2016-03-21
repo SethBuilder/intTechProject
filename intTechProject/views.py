@@ -31,7 +31,7 @@ def index(request):
         firstname_of_logged_user = None
 
     context_dict = {"users": user_list, "cities": city_list, "firstname_of_logged_user": firstname_of_logged_user, "slug_of_logged_user": slug_of_logged_user, "status":status}
-    
+
 
     error = False
     if 'q' in request.GET:
@@ -40,18 +40,18 @@ def index(request):
             error = True
         else:
             try:
-                try: 
+                try:
                     return city(request, q)
                 except:
                     cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
                     users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
-                    
+
                     searchText = 'Looking for something?'
-                    
+
                     return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText})
             except:
                 return render(request, 'search_results.html', {'searchText': searchText})
-            
+
     else:
         if 'city' in request.GET:
             citysearch = request.GET.get('city')
@@ -63,9 +63,9 @@ def index(request):
                         return city(request, citysearch)
                     except:
                         cities = City.objects.filter(name__icontains=citysearch)
-                        
+
                         searchText = 'Looking for someplace nice?'
-                        
+
                         return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1})
                 except:
                     return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1})
@@ -113,10 +113,11 @@ def user(request, user_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in
+    # (status = 0)?
     status = navbatlogic(request=request)
 
-    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
     try:
@@ -168,7 +169,7 @@ def search(request):
 
     return render(request, 'search_results.html',
         {'error': error})
-"""   
+"""
 
 def search(request):
 
@@ -185,18 +186,18 @@ def search(request):
             error = True
         else:
             try:
-                try: 
+                try:
                     return city(request, q)
                 except:
                     cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
                     users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
-                    
+
                     searchText = 'Looking for something?'
-                    
+
                     return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText, "slug_of_logged_user": slug_of_logged_user, "status":status})
             except:
                 return render(request, 'search_results.html', {'searchText': searchText, "slug_of_logged_user": slug_of_logged_user, "status":status})
-            
+
     else:
         if 'city' in request.GET:
             citysearch = request.GET.get('city')
@@ -208,13 +209,13 @@ def search(request):
                         return city(request, citysearch)
                     except:
                         cities = City.objects.filter(name__icontains=citysearch)
-                        
+
                         searchText = 'Looking for someplace nice?'
-                        
+
                         return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1, "slug_of_logged_user": slug_of_logged_user, "status":status})
                 except:
                     return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1, "slug_of_logged_user": slug_of_logged_user, "status":status})
-    
+
     return render(request, 'search_results.html', {"slug_of_logged_user": slug_of_logged_user, "status":status})
 
 
@@ -228,14 +229,14 @@ def createprofile(request):
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-   
+
     if request.method == 'POST':
         user = User.objects.get(username = request.user.username)
         user_form = UserForm(data=request.POST, instance = user)
 
         profile_form = UserProfileForm(data=request.POST)
 
- 
+
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -255,7 +256,7 @@ def createprofile(request):
 
             profile_form.save_m2m()
 
-           
+
 
             if 'next' in request.GET:
                 return redirect(request.GET['next'])
@@ -263,19 +264,19 @@ def createprofile(request):
         else:
             print user_form.errors, profile_form.errors
 
-        
+
 
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
 
-    
+
 
     return render(request,
             'createprofile.html',
             {'user_form': user_form, 'profile_form': profile_form, "slug_of_logged_user": slug_of_logged_user, "status":status} )
 
-    
+
 def updateprofile(request):
 
     #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
@@ -284,7 +285,6 @@ def updateprofile(request):
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-  
     if request.method == 'POST':
         update_user_form = UpdateUserForm(request.POST, instance=request.user)
         update_profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -292,7 +292,7 @@ def updateprofile(request):
         if update_user_form.is_valid() and update_profile_form.is_valid():
 
             update_user_form.save()
-            
+
             profile = update_profile_form.save(commit=False)
 
             profile.save()
@@ -304,16 +304,16 @@ def updateprofile(request):
         update_user_form = UpdateUserForm(instance=request.user)
         update_profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    #to check if user registered a profile 
+    #to check if user registered a profile
     user_has_profile = hasattr(request.user,  'profile')
 
     if user_has_profile:
             user_profile = getattr(request.user, 'profile')
             user_profile = getattr(user_profile, 'slug')
-        
+
             slug_of_logged_user = user_profile
 
-   
+
     return render(request, 'updateprofile.html', {'update_user_form' : update_user_form,
      'update_profile_form' : update_profile_form, "slug_of_logged_user": slug_of_logged_user, "status":status})
 
@@ -330,10 +330,11 @@ def navbatlogic(request):
         status = 0
     return status
 
-#to get profile slug of logged user
+
+# to get profile slug of logged user
 def get_profile_slug(request):
     status = navbatlogic(request=request)
-    if status==2:
+    if status == 2:
         user_profile = getattr(request.user, 'profile')
         user_profile = getattr(user_profile, 'slug')
         slug_of_logged_user = user_profile
@@ -341,7 +342,28 @@ def get_profile_slug(request):
         slug_of_logged_user = None
 
     return slug_of_logged_user
-        
-    
+
+
+def submitreview(request):
+
+    rating_user = None
+    rated_user = None
+
+    if request.method == 'GET':
+        rating_user = request.GET['rating_user']
+        rating_user = UserProfile.objects.get(user__username=rating_user)
+
+        rated_user = request.GET['rated_user']
+        rated_user = UserProfile.objects.get(user__username=rated_user)
+
+        comment = request.GET['comment']
+        rating = request.GET['rating']
+
+        if rating_user and rated_user and comment and rating:
+            user_rating = UserRating.objects.create(user=rated_user, rating_user=rating_user, comment=comment,
+                                                    rating=int(rating))
+            user_rating.save()
+
+            return HttpResponse("Rating confirmed")
 
 
