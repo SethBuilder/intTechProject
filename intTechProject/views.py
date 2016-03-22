@@ -4,7 +4,7 @@ from mainapp.models import UserProfile, UserRating, City, Hobby, Language
 from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import Count
-from mainapp.forms import UserForm, UserProfileForm, UpdateUserForm, UpdateProfileForm, UserFilter
+from mainapp.forms import UserForm, UserProfileForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
@@ -45,33 +45,60 @@ def city(request, city_name_slug):
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-    try:
-        # Can we find a city name slug with the given name?
-        # If we can't, the .get() method raises a DoesNotExist exception.
-        # So the .get() method returns one model instance or raises an exception.
-        city_name = City.objects.get(slug=city_name_slug)
 
-        # We also add the city object from the database to the context dictionary.
-        # We'll use this in the template to verify that the city exists.
-        # context_dict['city'] = city
+    # Can we find a city name slug with the given name?
+    # If we can't, the .get() method raises a DoesNotExist exception.
+    # So the .get() method returns one model instance or raises an exception.
+    city_name = City.objects.get(slug=city_name_slug)
 
-        user_list = User.objects.filter(profile__city=city_name).order_by('-profile__average_rating')[:20]
-        hobbies = Hobby.objects.all()
-        languages = Language.objects.all()
+    # We also add the city object from the database to the context dictionary.
+    # We'll use this in the template to verify that the city exists.
+    # context_dict['city'] = city
+    
+    
+    user_list = User.objects.filter(profile__city=city_name).order_by('-profile__average_rating')[:20]
+    hobbies = Hobby.objects.all()
+    languages = Language.objects.all()
 
-        context_dict = {"users": user_list, "city": city_name, "all_hobbies": hobbies, "all_languages": languages, "slug_of_logged_user": slug_of_logged_user, "status":status}
-        return render(request, 'cityProfile.html', context_dict)
+    f = UserFilter(request.GET, queryset=User.objects.all())
+    
+        
+    context_dict['users'] = user_list
+    context_dict['city'] = city_name
+    context_dict['all_hobbies'] = hobbies
+    context_dict['all_languages'] = languages
+    context_dict['slug_of_logged_user'] = slug_of_logged_user
+    context_dict['status'] = status
+    
+    if 'p' in request.GET:
+        q = request.GET.get('p')
+        try:
+            user_list2 = User.objects.filter(Q(username__contains=q) | Q(profile__slug__contains=q) | Q(first_name__contains=q) | Q(last_name__contains=q))
+            context_dict['users'] = user_list2
+        except:    
+            pass
+            
+    if 'h' in request.GET:
+        q = request.GET.get('h')
+        try:
+            user_list2 = User.objects.filter(profile__hobbies__hobby__contains=q)
+            context_dict['users'] = user_list2
+        except:    
+            pass
+           
+    if 'l' in request.GET:
+        q = request.GET.get('l')
+        try:
+            user_list2 = User.objects.filter(Q(username__contains=q) | Q(profile__slug__contains=q) | Q(first_name__contains=q) | Q(last_name__contains=q))
+            context_dict['users'] = user_list2
+        except:    
+            pass                       
 
-    except city.DoesNotExist:
-        # We get here if we didn't find the specified city.
-        # Don't do anything - the template displays the "no city" message for us.
-        pass
+    return render(request, 'cityProfile.html', context_dict)
 
-    # Go render the response and return it to the client.
-    return render(request, 'city.html', context_dict)
+
 
 def cityLoc(request):
-
     return render(request, 'cityMap.html' )
 
 

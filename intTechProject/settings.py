@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'django_messages',
     'registration', # adds the registration package
     'widget_tweaks',# to customize form fields
-    'django_filters',
     #'crispy_forms',
     
 )

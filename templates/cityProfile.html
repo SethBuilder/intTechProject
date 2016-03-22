@@ -13,8 +13,63 @@
 
         </div>
 
-    <div id="cityUsersFilter" class="col-md-2">
+        <div id="cityUsersFilter" class="col-md-2">
         <h3>Filter</h3>
+            
+            
+        <form action="" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="p" placeholder="People">                
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+                </span>    
+            </div>
+        </form>    
+       
+        <br>
+
+        <form action="" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="h" placeholder="Hobbies">                
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+                </span>    
+            </div>
+        </form>    
+       
+        <br>
+
+        <form action="" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control" name="l" placeholder="Languages">                
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+                </span>    
+            </div>
+        </form>    
+       
+        
+        <br>
+            
+        <form action="" method="get">
+            <input type="text" class="form-control" name="p" placeholder="People">
+            <input type="submit" value="Search"/>
+        </form>
+        
+        <br>
+    
+        
+        <input type="search" placeholder="Search Hobbies">
+        <ul class="filter-ul">
+        {% for hobby in all_hobbies %}
+            <li>
+            <p>
+            <input type="checkbox">
+            {{ hobby }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        
         <h4>Filter by hobby</h4>
             <input type="search" placeholder="Search Hobbies">
         <ul class="filter-ul">
@@ -42,32 +97,39 @@
         <div id="cityUsers" class="col-md-10">
 
             <h3>{{ city.name }}'s Superstars</h3>
-            <table class="table table-striped">
-                {% for user in users %}
+            <table class="table table-striped" id="usertable">
+                
+                {% if users %}
+                    {% for user in users %}
                     <tr>
                         <td>
                             <img src="{% static 'images/maleProfile1.jpg' %}" width="40" height="40">
-                            <a href="{% url 'user' user.profile.slug %}"
-                               style="color:rgba(0,0,200,1.00)"
-                               class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>
+                            <a href="{% url 'user' user.profile.slug %}" style="color:rgba(0,0,200,1.00)" class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>
                             {% for i in user.profile.get_range_average %}
                                 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             {% endfor %}
                         </td>
 
+                        
                         <td>
                             <p>
-                                {% if user.profile.hobbies.all %}
-                                Hobbies:
+                                {% if user.profile.languages.all %}
+                                Languages:
                             {% endif %}
-                                {% for hobby in user.profile.hobbies.all %}
-                                    {{ hobby.hobby }}
+                                {% for language in user.profile.languages.all %}
+                                    {{ languages.language }}
                                 {% endfor %}
                             </p>
                         </td>
+                        
                     </tr>
-                {% endfor %}
+                    {% endfor %}
+                
+                {% else %}
+                <tr><td><p>No users were found.</p></td></tr>    
+                {% endif %}
             </table>
         </div>
     </div>
+    
 {% endblock %}
