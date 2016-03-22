@@ -19,6 +19,16 @@
 
 }
 
+
+#about-jumbotron {
+    height: 500px;
+    margin-left: 0;
+    margin-right: 0;
+    background-image: url("../images/bk5.png");
+    background-size: cover;
+
+}
+
 #profile-jumbotron {
     height: 45vh;
 
@@ -53,7 +63,16 @@
     color: #FFFFFF;
 }
 
-.jumbotron p {
+.about h1 {
+    font-size: 40px;
+    font-family: source-serif-pro;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF;
+    margin: auto;
+}
+
+.about p {
     font-size: 20px;
     color: #FFFFFF;
     font-family: source-serif-pro;
@@ -130,7 +149,19 @@
     height: 320px
 }
 
+.learn-more-about {
+    background-color: #f7f7f7;
+    padding-top: -2%;
+    height: 200px
+}
+
 .learn-more h3 {
+    font-family: 'Shift', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.learn-more-about h3 {
     font-family: 'Shift', sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -204,11 +235,22 @@ footer {
     margin-bottom: 5px;
 }
 
-section {
+section .homePageSearchBar{
     margin-left: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.about section .header{
+    margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #000000;
+
+}
+
+
+
 
 .learn-more .container .row {
 
@@ -227,11 +269,20 @@ section {
 
 }
 
-.jumbotron .container .header {
+.about .container section {
     clear: left;
     float: left;
-    width: 650px;
+    width: 450px;
+    background-color: black;
+    margin-top: 10px;
+}
+
+.about .container .header {
+    clear: left;
+    float: left;
+    width: 590px;
     margin-left: -20px;
+    background-color: #000000;
 }
 
 .superstars {
