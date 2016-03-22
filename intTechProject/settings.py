@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'registration', # adds the registration package
     'widget_tweaks',# to customize form fields
     #'crispy_forms',
+    
 )
 
 MIDDLEWARE_CLASSES = (
