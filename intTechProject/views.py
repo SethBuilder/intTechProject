@@ -321,6 +321,16 @@ def updateprofile(request):
     return render(request, 'updateprofile.html', {'update_user_form' : update_user_form,
      'update_profile_form' : update_profile_form, "slug_of_logged_user": slug_of_logged_user, "status":status})
 
+def about(request):
+
+    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    status = navbatlogic(request=request)
+
+    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    slug_of_logged_user = get_profile_slug(request=request)
+    
+    return render(request, 'about.html', {"slug_of_logged_user": slug_of_logged_user, "status":status})
+
 #status = 0 -->user not logged in
 #status = 1 --> user logged in with no profile (just wants to find guides)
 #status = 2 --> user logged in with profile (wants to find guides and become a guide as well)

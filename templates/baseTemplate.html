@@ -48,7 +48,7 @@
                         {% elif status == 1%}
                         <li><a href="{{ HTTP_HOST }}/messages/" class="text-center">Messages ({% inbox_count %})</a></li>
                          {% endif %}
-                        <li><a href="#" class="text-center">About</a></li>
+                        <li><a href="{% url 'about' %}" class="text-center">About</a></li>
                         <li><a href="#" class="text-center">Travel Stories</a></li>
                          <li><a href="/cityloc/" class="text-center">Popular Cities</a></li>
 
