@@ -2,6 +2,7 @@ import os
 import django
 import random
 from django.core.files.base import ContentFile
+from intTechProject import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'intTechProject.settings')
 
@@ -25,12 +26,13 @@ def get_cities():
     city_images = []
 
     for i in range(len(city_names)):
-        # new_city_image = open('static/images/cityBackgrounds/' + city_names[i] + '.jpg', 'r')
+        new_city_image = "%s/" + city_names[i] + ".jpg"
+        # open('static/images/cityBackgrounds/' + city_names[i] + '.jpg', 'r')
 
         created_city = City.objects.get_or_create(name=city_names[i], country=countries[i],
                                                   information=city_descriptions[i], latitude=lats[i],
                                                   longitude=longs[i])[0]
-        # created_city.image = city_images[random_city]
+        created_city.image = new_city_image % 'city_images'
         created_city.save()
         cities.append(created_city)
     return cities
@@ -57,7 +59,7 @@ def create_user_details(male_names, female_names, last_names, created_city):
     # Create a username
     username = first_name.lower() + last_name.lower()
 
-    # Set all passwords to be passwords for testing (could be changed later)
+    # Set all passwords to be passwords for testing
     password = 'password'
 
     profile_picture = open("static/populationScriptFiles/Images/maleProfile1.jpg", 'r')
