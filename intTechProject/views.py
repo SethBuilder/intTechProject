@@ -86,7 +86,7 @@ def city(request, city_name_slug):
     if 'l' in request.GET:
         q = request.GET.get('l')
         try:
-            user_list2 = User.objects.filter(Q(username__contains=q) | Q(profile__slug__contains=q) | Q(first_name__contains=q) | Q(last_name__contains=q))
+            user_list2 = User.objects.filter(profile__languages__language__contains=q)
             context_dict['users'] = user_list2
         except:    
             pass                       
