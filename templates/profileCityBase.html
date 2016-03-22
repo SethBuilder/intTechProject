@@ -9,12 +9,16 @@
 
             <img class="big-image" src="{{ user.city.image.url }}">
 
-            <div class="container" id="city-title">{{ user.city }}</div>
+            <div class="container" id="city-title">
+                <a href="{% url 'city' user.city.slug %}"> {{ user.city }}</a>
+            </div>
 
         {% else %}
 
             <img class="big-image" src="{{ city.image.url }}">
-            <div class="container" id="city-title">{{ city.name }}</div>
+            <div class="container" id="city-title">
+                <a href="{% url 'city' city.slug %}"> {{ city.name }}</a>
+            </div>
 
         {% endif %}
 

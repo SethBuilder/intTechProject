@@ -7,9 +7,11 @@
     color: white;
 
 }
+
 #popularCityTitle{
     color: black;
 }
+
 #index-jumbotron {
     height: 490px;
     margin-left: 0;
@@ -31,7 +33,6 @@
 
 #profile-jumbotron {
     height: 45vh;
-
 }
 
 #city-title {
@@ -90,7 +91,7 @@
     top: 45vh;
     transform: translate(-50%, -50%);
 
-    left: 50%;
+    left: 50vw;
     margin-left: auto;
     margin-right: auto;
 
@@ -186,9 +187,6 @@
     color: #FCFCFC;
 }
 
-#messageUserButton {
-    padding-bottom: 4%;
-}
 
 .neighborhood-guides {
     background-color: #efefef;
@@ -209,10 +207,7 @@ h1 {
     font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
     font-style: normal;
     font-weight: 400;
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
+    padding: 5px 5px 5px 5px;
 }
 
 p {
