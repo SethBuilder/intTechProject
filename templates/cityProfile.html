@@ -98,7 +98,7 @@
             {% for user in users %}
             <tr>
                 <td>
-                    <img src="{{ user.profilepic.url }}" width="40" height="40">
+                    <img src="{{ user.profile.profilepic.url }}" width="40" height="40">
                     <a href="{% url 'user' user.profile.slug %}" style="color:rgba(0,0,200,1.00)" class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>                    {% for i in user.profile.get_range_average %}
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span> {% endfor %}
                 </td>
