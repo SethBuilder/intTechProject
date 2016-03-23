@@ -5,12 +5,12 @@
 
     {% if user.profilepic %}
 
-        <img class="img-responsive img-circle center-element" src="{{ user.profilepic.url }}"
+        <img class="img-responsive img-circle center-element" alt="basic profile image" src="{{ user.profilepic.url }}"
              id="profilePic">
 
     {% else %}
 
-        <img class="img-responsive img-circle center-element" src="{% static "images/Profile Pictures/basicUser.png" %}"
+        <img class="img-responsive img-circle center-element" alt="basic profile image" src="{% static "images/Profile Pictures/basicUser.png" %}"
              id="profilePic">
 
     {% endif %}

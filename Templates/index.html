@@ -5,10 +5,10 @@
         <section class="homePageSearchBar">
             <form action="{% url 'search' %}" method="get">
                 <div class="form-group">
-                    <label for="mainSearchBox">
+                    <label for="mainSearchBox"></label>
 
                         {% if user.is_authenticated and firstname_of_logged_user%}
-                        <h1 class="text-center" id="extraglow">{{firstname_of_logged_user | title}}! where do you want to go?</h1></label>
+                        <h1 class="text-center" id="extraglow">{{firstname_of_logged_user | title}}! where do you want to go?</h1>
                         {%else%}
 
                         <h1 class="text-center" id="extraglow">where do you want to go?</h1></label>
@@ -79,5 +79,5 @@
         </div>
     </div>
 </div>
-</div>
+
 {% endblock content %}
