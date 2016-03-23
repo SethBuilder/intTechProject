@@ -62,7 +62,7 @@ class UserProfile(models.Model):
     hobbies = models.ManyToManyField(Hobby)
     languages = models.ManyToManyField(Language)
 
-    profilepic = models.ImageField(upload_to='static/images/Profile Pictures', blank=True)
+    profilepic = models.ImageField(upload_to='profile_pictures', blank=True)
     city = models.ForeignKey(City)
     slug = models.SlugField(unique=True)
 

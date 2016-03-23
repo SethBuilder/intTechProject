@@ -186,24 +186,20 @@ def search(request):
     return render(request, 'search_results.html', {"slug_of_logged_user": slug_of_logged_user, "status":status})
 
 
-
 def createprofile(request):
 
-
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the logged in with a profile (status = 2) or logged in without a profile (status = 1)
+    # or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
-    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-   
     if request.method == 'POST':
         user = User.objects.get(username = request.user.username)
         user_form = UserForm(data=request.POST, instance = user)
 
         profile_form = UserProfileForm(data=request.POST)
-
- 
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -323,11 +319,12 @@ def get_profile_slug(request):
 
 def submitreview(request):
 
-    rating_user = None
-    rated_user = None
-
     if request.method == 'GET':
         rating_user = request.GET['rating_user']
+
+        if rating_user == 'None':
+            return HttpResponse("No rating user")
+
         rating_user = UserProfile.objects.get(user__username=rating_user)
 
         rated_user = request.GET['rated_user']

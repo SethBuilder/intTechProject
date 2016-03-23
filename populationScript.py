@@ -62,10 +62,8 @@ def create_user_details(male_names, female_names, last_names, created_city):
     # Set all passwords to be passwords for testing
     password = 'password'
 
-    profile_picture = open("static/populationScriptFiles/Images/maleProfile1.jpg", 'r')
-
     new_user = User.objects.get_or_create(username=username, email=email)[0]
-    #new_user.profilepic = profile_picture
+
     new_user.first_name = first_name
     new_user.last_name = last_name
 
@@ -73,6 +71,10 @@ def create_user_details(male_names, female_names, last_names, created_city):
 
     new_user_profile = UserProfile.objects.get_or_create(user=new_user, city=created_city, )[0]
     new_user_profile.slug = username
+
+    profile_picture = "%s/profile_picture" + str(random.randint(0, 4)) + ".jpg"
+    new_user_profile.profilepic = profile_picture % 'profile_pictures'
+
     new_user_profile.save()
 
     return new_user

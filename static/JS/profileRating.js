@@ -52,6 +52,9 @@ function saveReview(rated_username, rating_username) {
             $("#reviewText").val("");
 
         }
+        else{
+            $("#reviewText").val("Please log in and create a profile before reviewing other users");
+        }
 
     });
 
