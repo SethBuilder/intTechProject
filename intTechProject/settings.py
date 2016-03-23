@@ -37,10 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'notification',
-    'mailer',
+    'notification', #works with messages
+    'mailer',   #works with messages
     'mainapp',
-    'django_messages',
+    'django_messages', # messages solution
     'registration', # adds the registration package
     'widget_tweaks',# to customize form fields
     #'crispy_forms',
