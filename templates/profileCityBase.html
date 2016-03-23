@@ -3,35 +3,36 @@
 
 {% block content %}
 
-    <div class="jumbotron" id="profile-jumbotron">
+    {% if user.city %}
 
-        {% if user.city %}
+        <!-- Could not find any other way to insert a background image to the jumbotron without mixing concerns -->
+        <div class="jumbotron" id="profile-jumbotron" style="background-image: url(' {{ user.city.image.url }} ')">
 
-            <img class="big-image" src="{{ user.city.image.url }}">
+        <div class="container" id="city-title">
+            <a href="{% url 'city' user.city.slug %}"> {{ user.city }}</a>
+        </div>
 
-            <div class="container" id="city-title">
-                <a href="{% url 'city' user.city.slug %}"> {{ user.city }}</a>
-            </div>
+    {% else %}
 
-        {% else %}
+        <!-- Could not find any other way to insert a background image to the jumbotron without mixing concerns -->
+        <div class="jumbotron" id="profile-jumbotron" style="background-image: url(' {{ city.image.url }} ')">
 
-            <img class="big-image" src="{{ city.image.url }}">
-            <div class="container" id="city-title">
-                <a href="{% url 'city' city.slug %}"> {{ city.name }}</a>
-            </div>
+        <div class="container" id="city-title">
+            <a href="{% url 'city' city.slug %}"> {{ city.name }}</a>
+        </div>
 
-        {% endif %}
+    {% endif %}
 
-    </div>
+</div>
 
-    {% block profile_picture %}
+{% block profile_picture %}
+{% endblock %}
+
+<div class="profile-body">
+
+    {% block profile_body %}
     {% endblock %}
 
-    <div class="profile-body">
-
-        {% block profile_body %}
-        {% endblock %}
-
-    </div>
+</div>
 
 {% endblock %}

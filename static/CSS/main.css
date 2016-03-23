@@ -8,7 +8,7 @@
 
 }
 
-#popularCityTitle{
+#popularCityTitle {
     color: black;
 }
 
@@ -21,7 +21,6 @@
 
 }
 
-
 #about-jumbotron {
     height: 500px;
     margin-left: 0;
@@ -33,6 +32,8 @@
 
 #profile-jumbotron {
     height: 45vh;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #city-title {
@@ -155,7 +156,7 @@
     border: solid grey;
 }
 
-.review-star{
+.review-star {
     font-size: 1.5em;
 }
 
@@ -186,7 +187,6 @@
 .learn-more a {
     color: #FCFCFC;
 }
-
 
 .neighborhood-guides {
     background-color: #efefef;
@@ -245,22 +245,19 @@ footer {
     margin-bottom: 5px;
 }
 
-section .homePageSearchBar{
+section .homePageSearchBar {
     margin-left: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.about section .header{
+.about section .header {
     margin-left: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: #000000;
 
 }
-
-
-
 
 .learn-more .container .row {
 
