@@ -77,11 +77,13 @@
         </div>
 
         <div class="col-md-5 pull-right">
-
-            <button type="button" id="messageUserButton" class="btn btn-default btn-lg pull-right">
+            
+            <div class="input-group">
+                <a button type="button" id="messageUserButton" class="btn btn-default btn-lg pull-right" href="{% url 'messages_compose_to' user.user.profile.slug %}">
                 <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
                 Message {{ user.user.first_name }}
-            </button>
+                </a>
+            </div>
 
             <div class="profile-second-row" id="hobbiesLanguages">
 
