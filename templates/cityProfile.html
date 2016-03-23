@@ -93,12 +93,12 @@
 
         <h3>{{ city.name }}'s Superstars</h3>
         <table class="table table-striped">
-
+        <colgroup width="30%"></colgroup>
             {% if users %} 
             {% for user in users %}
             <tr>
                 <td>
-                    <img src="{% static 'images/maleProfile1.jpg' %}" width="40" height="40">
+                    <img src="{{ user.profilepic.url }}" width="40" height="40">
                     <a href="{% url 'user' user.profile.slug %}" style="color:rgba(0,0,200,1.00)" class="homePageList">{{ user.first_name }} {{ user.last_name }}</a>                    {% for i in user.profile.get_range_average %}
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span> {% endfor %}
                 </td>
@@ -109,7 +109,7 @@
                         Hobbies: 
                         {% endif %} 
                         {% for hobby in user.profile.hobbies.all %} 
-                        {{ hobby.hobby }} 
+                        <span class="hobby-language">{{ hobby.hobby }}</span>
                         {% endfor %}
                     </p>
                 </td>
@@ -120,7 +120,7 @@
                         Languages: 
                         {% endif %} 
                         {% for language in user.profile.languages.all %} 
-                        {{ language.language }} 
+                        <span class="hobby-language">{{ language.language }}</span>
                         {% endfor %}
                     </p>
                 </td>
