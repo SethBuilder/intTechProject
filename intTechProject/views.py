@@ -95,7 +95,13 @@ def city(request, city_name_slug):
     
 def cityLoc(request):
 
-    return render(request, 'cityMap.html' )
+        #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    status = navbatlogic(request=request)
+
+    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    slug_of_logged_user = get_profile_slug(request=request)
+
+    return render(request, 'cityMap.html', {"slug_of_logged_user": slug_of_logged_user, "status":status})
 
 
 def user(request, user_name_slug):
@@ -123,7 +129,6 @@ def user(request, user_name_slug):
         context_dict['average_ratings'] = user_profile.get_range_average()
         context_dict['slug_of_logged_user'] = slug_of_logged_user
         context_dict['status'] = status
-        print user_profile.get_range_average()
 
         # context_dict['user_username'] = user_profile.username
         # context_dict['user_firstname'] = user.first_name
@@ -153,7 +158,8 @@ def search(request):
             error = True
         else:
             try:
-                try: 
+                try:
+                    q = q
                     return city(request, q)
                 except:
                     cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
@@ -173,6 +179,7 @@ def search(request):
             else:
                 try:
                     try:
+                        citysearch = citysearch.lower()
                         return city(request, citysearch)
                     except:
                         cities = City.objects.filter(name__icontains=citysearch)

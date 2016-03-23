@@ -26,12 +26,12 @@ def get_cities():
     city_images = []
 
     for i in range(len(city_names)):
-        new_city_image = "%s/" + city_names[i] + ".jpg"
-        # open('static/images/cityBackgrounds/' + city_names[i] + '.jpg', 'r')
 
         created_city = City.objects.get_or_create(name=city_names[i], country=countries[i],
                                                   information=city_descriptions[i], latitude=lats[i],
                                                   longitude=longs[i])[0]
+
+        new_city_image = "%s/" + city_names[i] + ".jpg"
         created_city.image = new_city_image % 'city_images'
         created_city.save()
         cities.append(created_city)
@@ -59,10 +59,10 @@ def create_user_details(male_names, female_names, last_names, created_city):
     # Create a username
     username = first_name.lower() + last_name.lower()
 
-    # Set all passwords to be passwords for testing
-    password = 'password'
-
     new_user = User.objects.get_or_create(username=username, email=email)[0]
+
+    # Set all passwords to be passwords for testing
+    new_user.password = 'password'
 
     new_user.first_name = first_name
     new_user.last_name = last_name
@@ -145,6 +145,20 @@ def create_users():
         # Save the new user
         user_details.profile.save()
 
+    user_list = ['leifos', 'laura', 'david']
+    created_city = City.objects.get(name="Glasgow")
+    for new_person in user_list:
+        new_user = User.objects.get_or_create(username=new_person, email=new_person + "@hotmail.com")[0]
+        new_user.set_password(new_person)
+        new_user.save()
+
+        new_user_profile = UserProfile.objects.get_or_create(user=new_user, city=created_city, )[0]
+        new_user_profile.slug = new_person
+
+        profile_picture = "%s/profile_picture" + str(random.randint(0, 4)) + ".jpg"
+        new_user_profile.profilepic = profile_picture % 'profile_pictures'
+
+        new_user_profile.save()
 
 def leave_reviews():
 
