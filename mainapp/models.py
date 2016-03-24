@@ -59,8 +59,8 @@ class Language(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
 
-    hobbies = models.ManyToManyField(Hobby)
-    languages = models.ManyToManyField(Language)
+    hobbies = models.ManyToManyField(Hobby, blank=True)
+    languages = models.ManyToManyField(Language, blank=True)
 
     profilepic = models.ImageField(upload_to='profile_pictures', blank=True)
     city = models.ForeignKey(City)

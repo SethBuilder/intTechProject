@@ -31,7 +31,7 @@
 }
 
 #profile-jumbotron {
-    height: 45vh;
+    height: 22vw;
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -89,7 +89,7 @@
     height: 200px;
 
     position: absolute;
-    top: 45vh;
+    top: 22vw;
     transform: translate(-50%, -50%);
 
     left: 50vw;
