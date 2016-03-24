@@ -70,6 +70,7 @@ class UserProfile(models.Model):
     ratings_count = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
+
         # Uncomment if you don't want the slug to change every time the name changes
         self.slug = slugify(self.user.username)
         super(UserProfile, self).save(*args, **kwargs)
@@ -91,9 +92,6 @@ class UserProfile(models.Model):
     def get_range_average(self):
         print self.average_rating
         return range(self.average_rating)
-
-    #def avg_rating(self):
-        #return self.userrating_set.all().aggregate(Avg('rating'))['rating__avg']
 
 
 # this is the model for user ratings - one to many relationship with User

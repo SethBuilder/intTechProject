@@ -54,8 +54,7 @@ def city(request, city_name_slug):
     # We also add the city object from the database to the context dictionary.
     # We'll use this in the template to verify that the city exists.
     # context_dict['city'] = city
-    
-    
+
     user_list = User.objects.filter(profile__city=city_name).order_by('-profile__average_rating')[:20]
     hobbies = Hobby.objects.all()
     languages = Language.objects.all()
@@ -215,18 +214,14 @@ def createprofile(request):
             profile = profile_form.save(commit=False)
             profile.user = user
 
-
-
             if 'profilepic' in request.FILES:
                 profile.profilepic = request.FILES['profilepic']
             else:
-                profile.profilepic = 'static/images/Profile Pictures/basicUser'
+                profile.profilepic = 'profile_pictures/profile_picture0.jpg'
 
             profile.save()
 
             profile_form.save_m2m()
-
-           
 
             if 'next' in request.GET:
                 return redirect(request.GET['next'])

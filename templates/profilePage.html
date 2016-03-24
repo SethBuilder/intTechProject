@@ -3,17 +3,8 @@
 
 {% block profile_picture %}
 
-    {% if user.profilepic %}
-
         <img class="img-responsive img-circle center-element" alt="basic profile image" src="{{ user.profilepic.url }}"
              id="profilePic">
-
-    {% else %}
-
-        <img class="img-responsive img-circle center-element" alt="basic profile image" src="{% static "images/Profile Pictures/basicUser.png" %}"
-             id="profilePic">
-
-    {% endif %}
 
 {% endblock %}
 
