@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load inbox %}
 
-<!DOCTYPE html>
+<!DOCTYPE XHTML 1.0 Strict>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,14 +19,14 @@
             crossorigin="anonymous"></script>
 
     <!--link rel="stylesheet" type="text/css" href="{% static "CSS/main.css" %}"-->
-    <link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Chelsea+Market' rel='stylesheet' type='text/css/'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'/>
 
-    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}"/>
 
-    <script src="{% static "JS/app.js" %}"></script>
-    <script src="{% static 'JS/profileRating.js' %}"></script>
+    <script type="text/javascript" src="{% static "JS/app.js" %}"></script>
+    <script type="text/javascript" src="{% static 'JS/profileRating.js' %}"></script>
 
 </head>
 <body>
@@ -71,7 +71,7 @@
                 <li>
                     <div class="input-group">
                         <form action="{% url 'search' %}" method="get">
-                            <input type="text" class="form-control" name="q" placeholder="Search Cities and People">
+                            <input type="text" class="form-control" name="q" placeholder="Search Cities and People"/>
                         </form>
                     </div>
                 </li>
@@ -79,7 +79,7 @@
             </ul>
         </div>
     </nav>
-</div>
+
 
 {% block content %}{% endblock content %}
 
