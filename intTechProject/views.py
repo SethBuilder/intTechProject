@@ -51,10 +51,6 @@ def city(request, city_name_slug):
     # So the .get() method returns one model instance or raises an exception.
     city_name = City.objects.get(slug=city_name_slug)
 
-    # We also add the city object from the database to the context dictionary.
-    # We'll use this in the template to verify that the city exists.
-    # context_dict['city'] = city
-
     # Get the users registered to this city
     user_list = User.objects.filter(profile__city=city_name).order_by('-profile__average_rating')[:20]
 
@@ -67,27 +63,36 @@ def city(request, city_name_slug):
     # If p is found in the request, we are searching for people in this city
     if 'p' in request.GET:
         q = request.GET.get('p')
-        try:
-            user_list2 = User.objects.filter(Q(username__contains=q) | Q(profile__slug__contains=q) | Q(first_name__contains=q) | Q(last_name__contains=q))
-            context_dict['users'] = user_list2
+        try: # Look for any user with the search term in their username, page slug or first and last names
+            user_list = User.objects.filter(Q(username__contains=q) | Q(profile__slug__contains=q) | Q(first_name__contains=q) | Q(last_name__contains=q))
+            # Make sure list contains only users registered in this city
+            user_list = user_list.filter(profile__city=city_name)
+            # Re-add list to context dictionary
+            context_dict['users'] = user_list
         except:    
             pass
-       
+     
     # If h is found in the request, we are searching for people with a certain hobby in this city        
     if 'h' in request.GET:
         q = request.GET.get('h')
-        try:
-            user_list2 = User.objects.filter(profile__hobbies__hobby__contains=q)
-            context_dict['users'] = user_list2
+        try: # Look for any user with hobbies similar to the search query
+            user_list = User.objects.filter(profile__hobbies__hobby__contains=q)
+            # Make sure list contains only users registered in this city
+            user_list = user_list.filter(profile__city=city_name)
+            # Re-add list to context dictionary
+            context_dict['users'] = user_list
         except:    
             pass
            
     # If l is found in the request, we are searching for people with a certain language in this city          
     if 'l' in request.GET:
         q = request.GET.get('l')
-        try:
-            user_list2 = User.objects.filter(profile__languages__language__contains=q)
-            context_dict['users'] = user_list2
+        try: # Look for any user with languages similar to the search query
+            user_list = User.objects.filter(profile__languages__language__contains=q)
+            # Make sure list contains only users registered in this city
+            user_list = user_list.filter(profile__city=city_name)
+            # Re-add list to context dictionary
+            context_dict['users'] = user_list
         except:    
             pass                       
 
