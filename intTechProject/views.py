@@ -166,6 +166,8 @@ def search(request):
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
+    
+    searchText = 'Looking for something?'
 
     # If q is found this is a standard search, look for all possible cities or people that match the query
     if 'q' in request.GET:
@@ -179,8 +181,6 @@ def search(request):
                 users = User.objects.filter(
                     Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(
                         last_name__icontains=q))
-
-                searchText = 'Looking for something?'
 
                 # Return the search page with the list of cities or users similar to the search term
                 return render(request, 'search_results.html',
