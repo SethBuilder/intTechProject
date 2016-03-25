@@ -151,39 +151,44 @@ def search(request):
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-    # If q is foudn this is a standard search, look for all possible cities or people that match the query
+    # If q is found this is a standard search, look for all possible cities or people that match the query
     if 'q' in request.GET:
         q = request.GET.get('q')
         try:
-            try:
+            try: # Make the search query lowercase and attempt to return a city page if one can be found
                 q = q.lower()
                 return city(request, q)
-            except:
+            except: # If no city page can be found, instead search for a city or user similar to the search term
                 cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
                 users = User.objects.filter(Q(username__icontains=q) | Q(profile__slug__icontains=q) | Q(first_name__icontains=q) | Q(last_name__icontains=q))
                 
                 searchText = 'Looking for something?'
                 
+                # Return the search page with the list of cities or users similar to the search term
                 return render(request, 'search_results.html', {'cities': cities, 'users': users, 'query': q, 'searchText': searchText, "slug_of_logged_user": slug_of_logged_user, "status":status})
-        except:
+       
+        except: # If nothing can be found, return the page with no city or users
             return render(request, 'search_results.html', {'searchText': searchText, "slug_of_logged_user": slug_of_logged_user, "status":status})
         
     else:
-        if 'city' in request.GET:
+        if 'city' in request.GET: # If city then we are searching for only cities (from the main index page)
             citysearch = request.GET.get('city')
         try:
-            try:
+            try: # Make the search query lowercase and attempt to return a city page if one can be found
                 citysearch = citysearch.lower()
                 return city(request, citysearch)
-            except:
+            except: # If no city can be found, look for cities that are similar to the search term and display the results
                 cities = City.objects.filter(name__icontains=citysearch)
                 
                 searchText = 'Looking for someplace nice?'
                 
+                # Return the search results
                 return render(request, 'search_results.html', {'cities': cities, 'query': citysearch, 'searchText': searchText, 'cityOnly': 1, "slug_of_logged_user": slug_of_logged_user, "status":status})
         except:
+            # If no results can be found, return the standard search results page with no results
             return render(request, 'search_results.html', {'searchText': searchText, 'cityOnly':1, "slug_of_logged_user": slug_of_logged_user, "status":status})
-
+    
+    # Return the standard search results page
     return render(request, 'search_results.html', {"slug_of_logged_user": slug_of_logged_user, "status":status})
 
 
