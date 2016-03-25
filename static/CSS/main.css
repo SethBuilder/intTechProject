@@ -296,7 +296,7 @@ section .homePageSearchBar {
     height: 500px;
 }
 
-#navbar {
+#navbar, .navbar-header {
     background-color: aliceblue;
     color: #333232;
     padding-right: 2%;
