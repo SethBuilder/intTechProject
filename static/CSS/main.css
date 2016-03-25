@@ -87,8 +87,8 @@
 }
 
 .center-element {
-    width: 200px;
-    height: 200px;
+    width: 10vw;
+    height: 10vw;
 
     position: absolute;
     top: 22vw;
@@ -99,6 +99,18 @@
     margin-right: auto;
 
     z-index: 10;
+}
+
+@media (max-width: 1000px) {
+
+    .center-element{
+        width: 20vw;
+        height: 20vw;
+    }
+}
+
+.btn-wrap-text {
+    white-space: normal;
 }
 
 .justified-text {
