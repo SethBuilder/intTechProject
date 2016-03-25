@@ -17,20 +17,24 @@ def index(request):
     user_list = UserProfile.objects.select_related().annotate(rating=Avg('rated_user__rating')).order_by('-rating')[:5]
     city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
 
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
+    # or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
-    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-    #to get the firstname of the logged in user to customize greeting
-    if status==2:
-        if not request.user.first_name == None:
+    firstname_of_logged_user = ""
+    
+    # to get the firstname of the logged in user to customize greeting
+    if status == 2:
+        if request.user.first_name is not None:
             firstname_of_logged_user = request.user.first_name
     else:
         firstname_of_logged_user = None
 
-    context_dict = {"users": user_list, "cities": city_list, "firstname_of_logged_user": firstname_of_logged_user, "slug_of_logged_user": slug_of_logged_user, "status":status}
+    context_dict = {"users": user_list, "cities": city_list, "firstname_of_logged_user": firstname_of_logged_user, 
+                    "slug_of_logged_user": slug_of_logged_user, "status":status}
 
     return render(request, "index.html", context_dict)
 
@@ -39,21 +43,17 @@ def city(request, city_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
+    # or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
-    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
-
 
     # Can we find a city name slug with the given name?
     # If we can't, the .get() method raises a DoesNotExist exception.
     # So the .get() method returns one model instance or raises an exception.
     city_name = City.objects.get(slug=city_name_slug)
-
-    # We also add the city object from the database to the context dictionary.
-    # We'll use this in the template to verify that the city exists.
-    # context_dict['city'] = city
 
     user_list = User.objects.filter(profile__city=city_name).order_by('-profile__average_rating')[:20]
     hobbies = Hobby.objects.all()
@@ -92,12 +92,14 @@ def city(request, city_name_slug):
 
     return render(request, 'cityProfile.html', context_dict)
     
-def cityLoc(request):
+    
+def cityloc(request):
 
-        #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+        # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
+        # or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
-    #to get the profile link in the nav bar (only viewable when logged + has a profile)
+    # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
     return render(request, 'cityMap.html', {"slug_of_logged_user": slug_of_logged_user, "status":status})
@@ -107,7 +109,7 @@ def user(request, user_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -144,7 +146,7 @@ def user(request, user_name_slug):
     return render(request, 'profilePage.html', context_dict)
 
 def search(request):
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -244,7 +246,7 @@ def createprofile(request):
     
 def updateprofile(request):
 
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -285,7 +287,7 @@ def updateprofile(request):
 
 def about(request):
 
-    #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
     status = navbatlogic(request=request)
 
     #to get the profile link in the nav bar (only viewable when logged + has a profile)

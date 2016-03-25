@@ -388,3 +388,8 @@ footer {
 .hobby-language {
     text-decoration: underline;
 }
+
+#map{
+    width: 100vw;
+    height: 100vh;
+}
