@@ -120,6 +120,7 @@ LOGIN_URL = '/login/'  # The page users are directed to if they are not logged i
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
+# Add the ability to show inbox count on the web pages
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django_messages.context_processors.inbox',
