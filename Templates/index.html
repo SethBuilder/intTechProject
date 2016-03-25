@@ -1,27 +1,40 @@
 {% extends "baseTemplate.html" %} {% block content %}
 
+<!--Jumbotron section of the home page-->
 <div class="jumbotron" id="index-jumbotron">
     <div class="container">
         <section class="homePageSearchBar">
             <form action="{% url 'search' %}" method="get">
                 <div class="form-group">
-                    <label for="mainSearchBox"></label>
-
+                        <!--if the user is logged in and has entered a first name then greet him with his first name-->
                         {% if user.is_authenticated and firstname_of_logged_user%}
                         <h1 class="text-center" id="extraglow">{{firstname_of_logged_user | title}}! where do you want to go?</h1>
+                        <!--else show generic greeting-->
                         {%else%}
+                        <h1 class="text-center" id="extraglow">where do you want to go?</h1>
 
-                        <h1 class="text-center" id="extraglow">where do you want to go?</h1></label>
                         {% endif %}
-                        <input type="text" class="form-control input-lg" id="searchBoxGlow" name="city" placeholder="Glasgow">
-                </div>
 
+                        <!--search field-->
+                        <input type="text" class="form-control input-lg" id="searchBoxGlow" name="city" placeholder="Search Cities">
+                </div>
+                <!--show two buttons: "Find a Guide" and "Become a Guide"-->
                 <div class="row">
                     <div class="col-xs-6">
                         <button type="submit" class="btn btn-default btn-lg btn-block">Find a Guide</button>
                     </div>
                     <div class="col-xs-6">
+                        {% if status == 0 %}<!--if user is not logged in, direct to sign up page-->
                         <a class="btn btn-default btn-lg btn-block" href="{% url 'registration_register' %}" role="button">Become a Guide</a>
+
+                        {% elif status == 1 %}<!--if user is logged in but hasn't created a profile, direct to create profile page-->
+                        <a class="btn btn-default btn-lg btn-block" href="{% url 'createprofile' %}" role="button">Become a Guide</a>
+
+                        {% elif status == 2 %}<!--if user is logged in and created a profile, direct to edit profile page to specify his city-->
+                        <a class="btn btn-default btn-lg btn-block" href="{% url 'updateprofile' %}" role="button">Become a Guide</a>
+
+                        {% endif %}
+
                     </div>
                 </div>
             </form>
@@ -29,13 +42,17 @@
     </div>
 </div>
 
+
+<!--Super Stars section-->
 <div class="learn-more">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
                 <h3>Super Stars</h3>
+                <!--if there are users in database, pull their data-->
                 {% if users %}
                     <ul>
+                        <!--traverse users, pull first name and link it to profile. Also pull city, country and avg rating-->
                         {% for user_profile in users %}
                             <li><p><a href="{% url 'user' user_profile.slug %}"
                                         style="color:rgba(0,0,200,1.00)"
@@ -55,9 +72,15 @@
                     <p>no users to show</p>
                 {% endif %}
             </div>
-            
+
+            <!--Popular Cities section-->         
             <div class="col-md-6">
-                <h3><a id="popularCityTitle" href="{% url 'cityloc' %}">Popular Cities</a></h3> {% if cities %}
+
+                <!--link title with popular cities map page-->
+                <h3><a id="popularCityTitle" href="{% url 'cityloc' %}">Popular Cities</a></h3> 
+
+                <!--if there are cities, pull their names, link to matching profile pages and pull the number of guides in each city-->
+                {% if cities %}
                 <ul>
                     {% for city in cities %}
                         <li>
@@ -68,14 +91,10 @@
                         </li>
                     {% endfor %}
                 </ul>
-            {% else %}
-                <p>no cities to show</p>
-            {% endif %}
+                {% else %}
+                    <p>no cities to show</p>
+                {% endif %}
             </div>
-            <!--<div class="col-md-4">
-                <h3>We Value Your Feedback</h3>
-                <p>Do you have something to say about our website? We want to hear it!.</p>
-                <p><a href="#">Send feedback!</a></p>-->
         </div>
     </div>
 </div>
