@@ -7,10 +7,6 @@
 
 }
 
-#popularCityTitle {
-    color: black;
-}
-
 #index-jumbotron {
     height: 490px;
     margin-left: 0;
@@ -33,6 +29,10 @@
     height: 22vw;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+#popularCityTitle {
+    color: black;
 }
 
 #city-title {
@@ -129,7 +129,7 @@
     list-style-type: none;
 }
 
-.homePageSearchBar {
+#homePageSearchBar {
     width: 800px;
     height: 200px;
 
@@ -138,8 +138,9 @@
     transform: translate(-50%);
 
     left: 50%;
-    margin-left: auto;
-    margin-right: auto;
+        margin-left: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #searchBoxGlow {
@@ -206,16 +207,6 @@
     border-bottom: 1px solid #dbdbdb;
 }
 
-.neighborhood-guides h2 {
-    color: #393c3d;
-    font-size: 24px;
-}
-
-.neighborhood-guides p {
-    font-size: 15px;
-    margin-bottom: 13px;
-}
-
 h1 {
     font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
     font-style: normal;
@@ -244,24 +235,6 @@ footer {
     bottom: 0;
     position: fixed;
     width: 100%;
-}
-
-.next-step a {
-    color: #000000;
-    font-family: 'Shift', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.next-step .container {
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-section .homePageSearchBar {
-    margin-left: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .about section .header {
@@ -305,10 +278,6 @@ section .homePageSearchBar {
     background-color: #000000;
 }
 
-.superstars {
-    height: 500px;
-}
-
 #navbar, .navbar-header {
     background-color: aliceblue;
     color: #333232;
@@ -342,24 +311,8 @@ section .homePageSearchBar {
     padding-top: 0;
 }
 
-/* below two selectors are for star ratings*/
-span.stars, span.stars span {
-    display: block;
-    background: url("/static/images/stars.png") 0 -16px repeat-x;
-    width: 80px;
-    height: 16px;
-}
-
-span.stars span {
-    background-position: 0 0;
-}
-
 .homePageList {
     font-family: "Open Sans", Arial, sans-serif;
-}
-
-#userControls a {
-    color: black;
 }
 
 .profile-second-row {
@@ -405,29 +358,6 @@ span.stars span {
     margin-left: 15px;
 }
 
-.formboxsignup {
-
-    width: 250px;
-    height: inherit;
-    border: solid;
-    border-width: 1px;
-    margin: auto;
-    margin-bottom: 50px;
-
-}
-
-.formboxlogin {
-
-    width: 250px;
-    height: inherit;
-    border: solid;
-    border-width: 1px;
-    margin: auto;
-    margin-bottom: 50px;
-    margin-top: 50px;
-
-}
-
 .formboxprofile {
 
     width: 500px;
@@ -459,6 +389,7 @@ span.stars span {
 
 .hobby-language {
     text-decoration: underline;
+<<<<<<< HEAD
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -478,4 +409,8 @@ span.stars span {
 
 }
 
+#map{
+    width: 100vw;
+    height: 100vh;
+}
 
