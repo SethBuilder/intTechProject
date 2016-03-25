@@ -14,17 +14,18 @@ from django.core.urlresolvers import reverse
 
 
 def index(request):
+    #pull the 5 users with the highest rating
     user_list = UserProfile.objects.select_related().annotate(rating=Avg('rated_user__rating')).order_by('-rating')[:5]
+
+    #pull the 5 cities with the highest number of users
     city_list = City.objects.select_related().annotate(total=Count('userprofile__id')).order_by('-total')[:5]
 
-    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
-    # or not logged in (status = 0)?
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
-
-    firstname_of_logged_user = ""
 
     # to get the firstname of the logged in user to customize greeting
     if status == 2:
@@ -33,6 +34,7 @@ def index(request):
     else:
         firstname_of_logged_user = None
 
+    #pass top 5 users, top 5 cities, first name, profile tab link, status
     context_dict = {"users": user_list, "cities": city_list, "firstname_of_logged_user": firstname_of_logged_user,
                     "slug_of_logged_user": slug_of_logged_user, "status": status}
 
@@ -43,8 +45,8 @@ def city(request, city_name_slug):
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
 
-    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
-    # or not logged in (status = 0)?
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -106,10 +108,9 @@ def city(request, city_name_slug):
 
 
 def cityloc(request):
-    # is the logged in with a profile (status = 2) or logged in without a profile (status = 1)
-    # or not logged in (status = 0)?
-    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
-    # or not logged in (status = 0)?
+
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -158,8 +159,9 @@ def user(request, user_name_slug):
 
 
 def search(request):
-    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
-    # or not logged in (status = 0)?
+
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -218,47 +220,57 @@ def search(request):
 
 
 def createprofile(request):
-    # is the logged in with a profile (status = 2) or logged in without a profile (status = 1)
-    # or not logged in (status = 0)?
+
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
+    #if user submits create profile form
     if request.method == 'POST':
+        #pull the user instance
         user = User.objects.get(username=request.user.username)
         user_form = UserForm(data=request.POST, instance=user)
 
+        #save profile form data
         profile_form = UserProfileForm(data=request.POST)
 
+        #if user form and profile form are valid then save user form
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.save()
 
+            #delay saving profile form
             profile = profile_form.save(commit=False)
+
+            #save User instance
             profile.user = user
 
+            #pull profile pic if it was uploaded
             if 'profilepic' in request.FILES:
                 profile.profilepic = request.FILES['profilepic']
             else:
                 profile.profilepic = 'profile_pictures/profile_picture0.jpg'
 
+            #save profile
             profile.save()
 
+            #save m2m data (hobbies and languages)
             profile_form.save_m2m()
 
+            #redirect to home page
             if 'next' in request.GET:
                 return redirect(request.GET['next'])
-
+        #print errors
         else:
             print user_form.errors, profile_form.errors
-
-
-
+    #save data to data base
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
-
+    #pass necessary template and details
     return render(request,
                   'createprofile.html',
                   {'user_form': user_form, 'profile_form': profile_form, "slug_of_logged_user": slug_of_logged_user,
@@ -266,26 +278,34 @@ def createprofile(request):
 
 
 def updateprofile(request):
-    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
+    #if the user submits update profile form
     if request.method == 'POST':
+        #pull user instance
         update_user_form = UpdateUserForm(request.POST, instance=request.user)
+        #pull profile in question
         update_profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
+        #if user form and profile form are valid
         if update_user_form.is_valid() and update_profile_form.is_valid():
+            #save user form
             update_user_form.save()
 
+            #save profile
             profile = update_profile_form.save(commit=False)
-
             profile.save()
-
             update_profile_form.save_m2m()
 
+            #redirect to home page
             return HttpResponseRedirect(reverse('index'))
+    #save user and profile forms
     else:
         update_user_form = UpdateUserForm(instance=request.user)
         update_profile_form = UpdateProfileForm(instance=request.user.profile)
@@ -293,19 +313,15 @@ def updateprofile(request):
     # to check if user registered a profile
     user_has_profile = hasattr(request.user, 'profile')
 
-    if user_has_profile:
-        user_profile = getattr(request.user, 'profile')
-        user_profile = getattr(user_profile, 'slug')
-
-        slug_of_logged_user = user_profile
-
     return render(request, 'updateprofile.html', {'update_user_form': update_user_form,
                                                   'update_profile_form': update_profile_form,
                                                   "slug_of_logged_user": slug_of_logged_user, "status": status})
 
 
 def about(request):
-    # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
+    
+    # if the user is logged in with a profile then status = 2. else if the user is logged in without a profile then status = 1
+    # else if the user is not logged in (status = 0)
     status = navbatlogic(request=request)
 
     # to get the profile link in the nav bar (only viewable when logged + has a profile)
@@ -330,7 +346,9 @@ def navbatlogic(request):
 
 # to get profile slug of logged user
 def get_profile_slug(request):
+    #pull status of user
     status = navbatlogic(request=request)
+    #if user is logged in with profile then pull his profile slug. else slug is none
     if status == 2:
         user_profile = getattr(request.user, 'profile')
         user_profile = getattr(user_profile, 'slug')
