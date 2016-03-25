@@ -19,18 +19,13 @@
         </div>    
         
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <form action="#" method="GET">
-                    <div class="input-group">
                         {% if cityOnly %}
-                        <input type="text" class="form-control" name="city" placeholder="{{ searchText }}">
+                        <input type="text" class="form-control" name="city" placeholder="{{ searchText }}" width="100%">
                         {% else %}
                         <input type="text" class="form-control" name="q" placeholder="{{ searchText }}">
                         {% endif %}
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                        </span>    
-                    </div>
                 </form>
             </div>
         </div>
