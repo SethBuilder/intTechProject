@@ -74,6 +74,10 @@
     margin: auto;
 }
 
+#cityUsersTable{
+    column-width: 100px;
+}
+
 .about p {
     font-size: 20px;
     color: #FFFFFF;
