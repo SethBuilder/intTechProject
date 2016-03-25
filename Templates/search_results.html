@@ -20,7 +20,7 @@
         
         <div class="row">
             <div class="col-lg-6">
-                <form action="" method="GET">
+                <form action="#" method="GET">
                     <div class="input-group">
                         {% if cityOnly %}
                         <input type="text" class="form-control" name="city" placeholder="{{ searchText }}">
@@ -43,11 +43,11 @@
                 {% if cities %}
                 <table class="table table-striped">
                     {% for city in cities %}
-                    <tr><td><a href="{% url 'city' city.slug %}">{{ city.name }}</a></td></tr>
-                {% endfor %} 
+                        <tr><td><a href="{% url 'city' city.slug %}">{{ city.name }}</a></td></tr>
+                    {% endfor %} 
                 </table>
                 {% else %}
-                <p>No city was found.</p>
+                    <p>No city was found.</p>
                 {% endif %}
             </div>
         </div>
