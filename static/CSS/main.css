@@ -1,8 +1,7 @@
 .jumbotron {
 
-    background-repeat: no-repeat;
+    background: no-repeat fixed;
     background-size: cover;
-    background-attachment: fixed;
     margin-bottom: 0;
     color: white;
 
@@ -16,7 +15,7 @@
     height: 490px;
     margin-left: 0;
     margin-right: 0;
-    background-image: url("../images/Eiffel%20Sunset%203.JPG");
+    background-image: url("../images/Eiffel Sunset 3.JPG");
     background-size: cover;
 
 }
@@ -67,26 +66,29 @@
 
 .about h1 {
     font-size: 40px;
-    font-family: source-serif-pro;
+    font-family: source-serif-pro sans-serif;
     font-weight: 400;
     font-style: normal;
     color: #FFFFFF;
     margin: auto;
 }
 
+#cityUsersTable {
+    column-width: 100px;
+}
+
 .about p {
     font-size: 20px;
     color: #FFFFFF;
-    font-family: source-serif-pro;
+    font-family: source-serif-pro sans-serif;
     font-style: normal;
     font-weight: 400;
-    -webkit-box-shadow: 10px 5% 15px #833C3D;
-    box-shadow: 10px 5% 15px #833C3D;
+
 }
 
 .center-element {
-    width: 200px;
-    height: 200px;
+    width: 10vw;
+    height: 10vw;
 
     position: absolute;
     top: 22vw;
@@ -97,6 +99,18 @@
     margin-right: auto;
 
     z-index: 10;
+}
+
+@media (max-width: 1000px) {
+
+    .center-element{
+        width: 20vw;
+        height: 20vw;
+    }
+}
+
+.btn-wrap-text {
+    white-space: normal;
 }
 
 .justified-text {
@@ -150,8 +164,6 @@
     height: 15vh;
     overflow: auto;
     background-clip: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border: solid grey;
 }
@@ -168,7 +180,6 @@
 
 .learn-more-about {
     background-color: #f7f7f7;
-    padding-top: -2%;
     height: 160px
 }
 
@@ -211,7 +222,7 @@ h1 {
 }
 
 p {
-    font-family: source-serif-pro;
+    font-family: source-serif-pro sans-serif;
     font-style: normal;
     font-weight: 400;
     margin-left: 8px;
@@ -220,12 +231,12 @@ p {
 
 footer {
 
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
     background-color: #efefef;
     color: #393c3d;
     text-align: center;
-    font-family: source-serif-pro;
+    font-family: source-serif-pro sans-serif;
     font-style: normal;
     font-weight: 400;
     bottom: 0;
@@ -305,7 +316,6 @@ section .homePageSearchBar {
 #navbar-brand {
     font-family: "Chelsea Market", sans-serif;
     color: #333232;
-!important;
     font-size: x-large;
 }
 

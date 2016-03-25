@@ -6,7 +6,7 @@
         <section class="homePageSearchBar">
             <form action="{% url 'search' %}" method="get">
                 <div class="form-group">
-                        <!--if the user is logged in and has entered a first name then greet him with his first name-->
+
                         {% if user.is_authenticated and firstname_of_logged_user%}
                         <h1 class="text-center" id="extraglow">{{firstname_of_logged_user | title}}! where do you want to go?</h1>
                         <!--else show generic greeting-->
