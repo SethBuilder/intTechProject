@@ -101,8 +101,9 @@ def city(request, city_name_slug):
             pass                       
 
     return render(request, 'cityProfile.html', context_dict)
-    
-def cityLoc(request):
+
+
+def cityloc(request):
 
     #is the logged in with a profile (status = 2) or logged in without a profile (status = 1) or not logged in (status = 0)?
         # is the user logged in with a profile (status = 2) or logged in without a profile (status = 1)
