@@ -151,12 +151,12 @@ def search(request):
     #to get the profile link in the nav bar (only viewable when logged + has a profile)
     slug_of_logged_user = get_profile_slug(request=request)
 
-    
+    # If q is foudn this is a standard search, look for all possible cities or people that match the query
     if 'q' in request.GET:
         q = request.GET.get('q')
         try:
             try:
-                q = q
+                q = q.lower()
                 return city(request, q)
             except:
                 cities = City.objects.filter(Q(name__icontains=q) | Q(slug__icontains=q))
