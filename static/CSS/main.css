@@ -172,6 +172,8 @@
     font-size: 1.5em;
 }
 
+
+
 .learn-more {
     background-color: #f7f7f7;
     padding-top: 2%;
@@ -458,3 +460,22 @@ span.stars span {
 .hobby-language {
     text-decoration: underline;
 }
+
+/* Smartphones (portrait and landscape) ----------- */
+@media screen and (max-width : 400px) {
+.learn-more {
+    background-color: #f7f7f7;
+    padding-top: 2%;
+    height: auto;
+    padding-bottom: 10%
+    }
+
+    .learn-more-about {
+    background-color: #f7f7f7;
+    height: auto;
+    padding-bottom: 10%
+}
+
+}
+
+
