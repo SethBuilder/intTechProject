@@ -86,6 +86,30 @@
 
 }
 
+
+.formboxsignup {
+
+    width: 250px;
+    height: inherit;
+    border: solid;
+    border-width: 1px;
+    margin: auto;
+    margin-bottom: 50px;
+
+}
+
+.formboxlogin {
+
+    width: 250px;
+    height: inherit;
+    border: solid;
+    border-width: 1px;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 50px;
+
+}
+
 .center-element {
     width: 10vw;
     height: 10vw;
