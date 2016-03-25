@@ -87,6 +87,10 @@ class UserProfile(models.Model):
     def get_range_average(self):
         print self.average_rating
         return range(self.average_rating)
+        
+    # Function used for basic test in tests.py        
+    def setAvgRatingTest(self, newVal):
+        self.average_rating = newVal
 
 
 # this is the model for user ratings - one to many relationship with User
