@@ -130,7 +130,7 @@
 }
 
 #homePageSearchBar {
-    width: 800px;
+    width: 425px;
     height: 200px;
 
     position: absolute;
@@ -393,7 +393,7 @@ footer {
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media screen and (max-width : 400px) {
+@media screen and (max-width : 1000px) {
 .learn-more {
     background-color: #f7f7f7;
     padding-top: 2%;
